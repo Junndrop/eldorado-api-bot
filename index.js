@@ -67,7 +67,13 @@ headers:{
 }
 );
 
-const orders = res.data.results || [];
+const orders = (res.data.results || []).filter(
+x => ![
+"Canceled",
+"Completed",
+"Delivered"
+].includes(x.state.state)
+);
 
 console.log(
 "TOTAL:",
