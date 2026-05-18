@@ -152,21 +152,24 @@ const res=await axios.get(
 const updates=res.data.result;
 
 for(const u of updates){
-  updateId = u.update_id;
+
+updateId = u.update_id;
 
 if(!u.callback_query) continue;
 
-const data=u.callback_query.data;
+const data = u.callback_query.data;
+const orderId = data.split("_")[1];
 
-console.log("TOMBOL:",data);
-
-const orderId=data.split("_")[1];
+console.log("TOMBOL:", data);
+console.log("ORDER ID:", orderId);
 
 if(data.startsWith("start_"))
 console.log("KIRIM PESAN AWAL:",orderId);
 
 if(data.startsWith("done_"))
 console.log("PESANAN SELESAI:",orderId);
+
+}
 
 }catch(e){}
 
