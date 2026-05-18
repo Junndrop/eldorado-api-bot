@@ -102,14 +102,10 @@ ID: ${order.id}`
 );
 
 }
+
 }catch(err){
 
-console.log("EMAIL:", process.env.ELDO_EMAIL)
-console.log("PASSWORD ADA:", !!process.env.ELDO_PASSWORD)
-console.log("PANJANG PW:", process.env.ELDO_PASSWORD?.length)
-
 console.log("FULL ERROR:");
-
 console.log(err);
 
 console.log("MESSAGE:");
@@ -117,12 +113,6 @@ console.log(err.message);
 
 console.log("NAME:");
 console.log(err.name);
-}
-}
-
-}catch(err){
-
-console.log(err);
 
 }
 
