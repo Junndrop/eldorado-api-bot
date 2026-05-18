@@ -187,24 +187,35 @@ headers:{
 
 if(data.startsWith("done_")){
 
+try{
+
+const token = await getToken();
+
 console.log("PESANAN SELESAI:",orderId);
 
-await axios.post(
+const res = await axios.post(
 `https://api.eldorado.gg/messages/send`,
 {
-orderId: orderId,
+orderId:orderId,
 message:`Thank you for your order! I would appreciate it if you left a positive review ⭐`
 },
 {
 headers:{
-"Authorization":`Bearer ${token}`,
+Authorization:`Bearer ${token}`,
 "Content-Type":"application/json"
 }
 }
 );
 
+console.log("BERHASIL:",res.data);
+
+}catch(err){
+
+console.log("GAGAL:");
+console.log(err.response?.data || err.message);
+
 }
-  
+
 }
 
 }catch(e){}
