@@ -138,3 +138,26 @@ console.log(err.name);
 checkOrders();
 
 setInterval(checkOrders,30000);
+setInterval(async()=>{
+
+try{
+
+const res=await axios.get(
+`https://api.telegram.org/bot${TG_TOKEN}/getUpdates`
+);
+
+const updates=res.data.result;
+
+for(const u of updates){
+
+if(!u.callback_query) continue;
+
+const data=u.callback_query.data;
+
+console.log("TOMBOL:",data);
+
+}
+
+}catch(e){}
+
+},3000);
