@@ -9,7 +9,7 @@ const BOT_KEY = process.env.ELDO_BOT_KEY;
 Amplify.configure({
 Auth:{
 Cognito:{
-userPoolId:"us-east-2_MlnzCFgHK",
+userPoolId:"us-east-2_MlnzCFgHk",
 userPoolClientId:"1956req5ro9drdtbf5i6kis4la",
 loginWith:{
 email:true
