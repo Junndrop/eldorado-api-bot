@@ -11,6 +11,7 @@ const TG_TOKEN = process.env.BOT_TOKEN;
 const CHAT_ID = process.env.CHAT_ID;
 
 let sentOrders = [];
+let updateId = 0;
 
 Amplify.configure({
   Auth:{
@@ -145,12 +146,13 @@ setInterval(async()=>{
 try{
 
 const res=await axios.get(
-`https://api.telegram.org/bot${TG_TOKEN}/getUpdates`
+`https://api.telegram.org/bot${TG_TOKEN}/getUpdates?offset=${updateId+1}`
 );
 
 const updates=res.data.result;
 
 for(const u of updates){
+  updateId = u.update_id;
 
 if(!u.callback_query) continue;
 
