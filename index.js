@@ -155,6 +155,12 @@ if(!u.callback_query) continue;
 const data=u.callback_query.data;
 
 console.log("TOMBOL:",data);
+
+if(data.startsWith("start_"))
+console.log("KIRIM PESAN AWAL");
+
+if(data.startsWith("done_"))
+console.log("PESANAN SELESAI");
 }catch(e){}
 
 },3000);
