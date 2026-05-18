@@ -67,16 +67,17 @@ headers:{
 }
 );
 
+const orders = res.data.results || [];
+
 console.log(
 "TOTAL:",
-res.data.data.length
+orders.length
 );
 
 await sendTelegram(
-"Bot hidup ✅\nOrder: "+
-res.data.data.length
+"Bot hidup ✅\nOrder: " +
+orders.length
 );
-
 }catch(err){
 
 console.log("EMAIL:", process.env.ELDO_EMAIL)
