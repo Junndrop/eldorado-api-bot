@@ -7,38 +7,16 @@ const PASSWORD = process.env.ELDO_PASSWORD;
 
 const BOT_KEY = process.env.ELDO_BOT_KEY;
 
-const TG_TOKEN = process.env.BOT_TOKEN;
-let CHAT_ID = process.env.CHAT_ID;
-
 Amplify.configure({
-Auth: {
-Cognito: {
-userPoolId: "us-east-2_MlnzCFgHk",
-userPoolClientId: "1956req5ro9drdtbf5i6kis4la",
-loginWith: {
-email: true
+Auth:{
+Cognito:{
+userPoolId:"us-east-2_MlnzCFGhK",
+userPoolClientId:"1956req5ro9drdtbf5i6kis41a",
+loginWith:{
+email:true
 }
 }
 }
-});
-
-const TelegramBot = require("node-telegram-bot-api");
-
-const bot = new TelegramBot(TG_TOKEN,{
- polling:true
-});
-
-bot.onText(/\/start/,msg=>{
-
-CHAT_ID=msg.chat.id
-
-bot.sendMessage(
-msg.chat.id,
-"Bot aktif ✅"
-);
-
-checkOrders()
-
 });
 
 async function getToken(){
@@ -46,8 +24,8 @@ async function getToken(){
 console.log("LOGIN...");
 
 await signIn({
-username: EMAIL.trim(),
-password: PASSWORD.trim()
+username:EMAIL.trim(),
+password:PASSWORD.trim()
 });
 
 const session=await fetchAuthSession();
@@ -79,10 +57,10 @@ headers:{
 }
 );
 
-const orders = res.data.results;
+const orders=res.data.results;
 
-const activeOrders = orders.filter(
-x => ![
+const activeOrders=orders.filter(
+x=>![
 "Canceled",
 "Completed",
 "Delivered"
@@ -94,13 +72,12 @@ console.log(
 activeOrders.length
 );
 
-return activeOrders;
-
 }catch(err){
 
-console.log(err)
+console.log(err);
 
 }
 
 }
+
 checkOrders();
