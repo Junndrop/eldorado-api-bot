@@ -84,17 +84,16 @@ Total order: ${orders.length}`
 );
   for(const order of orders){
 
-console.log(JSON.stringify(order,null,2))
-
 await sendTelegram(
 `🛒 ORDER MASUK
 
-ID: ${order.id || "-"}
+Buyer: ${order.buyerUsername}
 
-Status: ${order.state?.state || "-"}
+Jumlah: ${order.purchaseQuantity}
 
-DATA:
-${JSON.stringify(order,null,2).slice(0,3000)}`
+Status: ${order.state?.state}
+
+ID: ${order.id}`
 );
 
   }
