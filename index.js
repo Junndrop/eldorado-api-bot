@@ -167,20 +167,38 @@ if(data.startsWith("start_")){
 
 console.log("KIRIM PESAN AWAL:",orderId);
 
-await sendTelegram(
-`Hello! Send your Roblox username and please read the description 🙂
+await axios.post(
+`https://api.eldorado.gg/messages/send`,
+{
+orderId: orderId,
+message:`Hello! Send your Roblox username and please read the description 🙂
 
 [Bot]`
-);
-
+},
+{
+headers:{
+"Authorization":`Bearer ${token}`,
+"Content-Type":"application/json"
 }
+}
+);
 
 if(data.startsWith("done_")){
 
 console.log("PESANAN SELESAI:",orderId);
 
-await sendTelegram(
-`Thank you for your order! I would appreciate it if you left a positive review ⭐`
+await axios.post(
+`https://api.eldorado.gg/messages/send`,
+{
+orderId: orderId,
+message:`Thank you for your order! I would appreciate it if you left a positive review ⭐`
+},
+{
+headers:{
+"Authorization":`Bearer ${token}`,
+"Content-Type":"application/json"
+}
+}
 );
 
 }
