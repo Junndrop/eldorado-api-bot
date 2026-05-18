@@ -107,7 +107,15 @@ Total: ${order.totalPrice?.amount} ${order.totalPrice?.currency}
 
 Status: ${order.state?.state}
 
-ID: ${order.id}`
+ID: ${order.id}`,
+[
+[
+{text:"📨 Kirim Pesan Awal",callback_data:`start_${order.id}`}
+],
+[
+{text:"✅ Pesanan Selesai",callback_data:`done_${order.id}`}
+]
+]
 );
 
 }
