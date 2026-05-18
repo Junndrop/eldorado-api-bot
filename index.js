@@ -160,21 +160,13 @@ const data=u.callback_query.data;
 
 console.log("TOMBOL:",data);
 
-if(data.startsWith("start_")){
+const orderId=data.split("_")[1];
 
-const orderId=data.replace("start_","");
-
+if(data.startsWith("start_"))
 console.log("KIRIM PESAN AWAL:",orderId);
 
-}
-
-if(data.startsWith("done_")){
-
-const orderId=data.replace("done_","");
-
+if(data.startsWith("done_"))
 console.log("PESANAN SELESAI:",orderId);
-
-}
 
 }catch(e){}
 
