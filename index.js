@@ -86,29 +86,20 @@ Total order: ${orders.length}`
 );
   for(const order of orders){
 
-const judul =
-order.offer?.gameTitle ||
-order.offer?.title ||
-order.offer?.description ||
-"Tidak ada";
-
-const buyer =
-order.buyer?.username ||
-order.user?.username ||
-order.username ||
-"Tidak diketahui";
+console.log(JSON.stringify(order,null,2))
 
 await sendTelegram(
 `🛒 ORDER MASUK
 
-ID: ${order.id}
+ID: ${order.id || "-"}
 
-Status: ${order.state?.state}
+Status: ${order.state?.state || "-"}
 
-Judul: ${judul}
-
-Buyer: ${buyer}`
+DATA:
+${JSON.stringify(order,null,2).slice(0,3000)}`
 );
+
+  }
 }catch(err){
 
 console.log("EMAIL:", process.env.ELDO_EMAIL)
