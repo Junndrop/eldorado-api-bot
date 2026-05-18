@@ -78,7 +78,10 @@ res.data.results.forEach(x=>{
 });
 
 const activeOrders = orders.filter(
-x => x.state === "Paid"
+x =>
+x.state !== "Canceled" &&
+x.state !== "Completed" &&
+x.state !== "Delivered"
 );
 
 console.log(
