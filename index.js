@@ -160,8 +160,8 @@ if(!u.callback_query) continue;
 const data = u.callback_query.data;
 const orderId = data.split("_")[1];
 
-console.log("TOMBOL:", data);
-console.log("ORDER ID:", orderId);
+console.log("TOMBOL:",data);
+console.log("ORDER ID:",orderId);
 
 if(data.startsWith("start_")){
 
@@ -183,8 +183,6 @@ Accept:"application/json"
 }
 }
 );
-
-}
 
 }
 
@@ -221,6 +219,7 @@ console.log("MSG:",err.message);
 }
 
 }
+
 }
 
 }catch(e){}
