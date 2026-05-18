@@ -71,14 +71,24 @@ headers:{
 }
 );
 
+const orders = res.data.results;
+
+res.data.results.forEach(x=>{
+ console.log("STATUS:", x.state);
+});
+
+const activeOrders = orders.filter(
+x => x.state === "Paid"
+);
+
 console.log(
-"TOTAL ORDER:",
-res.data.results.length
+"TOTAL ORDER AKTIF:",
+activeOrders.length
 );
 
 await sendTelegram(
-"Bot hidup ✅\nOrder: " +
-res.data.results.length
+`Bot hidup ✅
+Order aktif: ${activeOrders.length}`
 );
 
 }catch(err){
