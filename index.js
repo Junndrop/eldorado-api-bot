@@ -173,6 +173,8 @@ await sendTelegram(
 [Bot]`
 );
 
+}
+
 if(data.startsWith("done_")){
 
 console.log("PESANAN SELESAI:",orderId);
