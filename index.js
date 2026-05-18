@@ -86,11 +86,7 @@ x => ![
 );
 
 console.log("TOTAL:", orders.length);
-
-checkOrders();
-
-setInterval(checkOrders,30000);
-
+  
 for(const order of orders){
 
 await sendTelegram(
@@ -124,4 +120,14 @@ console.log(err.name);
 }
 }
 
+}catch(err){
+
+console.log(err);
+
+}
+
+}
+
 checkOrders();
+
+setInterval(checkOrders,30000);
