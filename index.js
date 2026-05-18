@@ -22,6 +22,30 @@ email: true
 }
 });
 
+const TelegramBot = require("node-telegram-bot-api");
+
+const TG_TOKEN = process.env.BOT_TOKEN;
+
+const bot = new TelegramBot(TG_TOKEN,{
+ polling:true
+});
+
+console.log("TELEGRAM START");
+
+bot.on("message",(msg)=>{
+ console.log(
+   "PESAN MASUK:",
+   msg.text
+ );
+});
+
+bot.onText(/\/start/,msg=>{
+ bot.sendMessage(
+   msg.chat.id,
+   "Bot aktif ✅"
+ );
+});
+
 async function sendTelegram(text){
 
 await axios.post(
