@@ -156,7 +156,25 @@ const data=u.callback_query.data;
 
 console.log("TOMBOL:",data);
 
+if(data.startsWith("start_")){
+
+console.log("KIRIM PESAN AWAL");
+
+await sendTelegram(
+"Pesan otomatis terkirim ✅"
+);
+
 }
+
+if(data.startsWith("done_")){
+
+console.log("PESANAN SELESAI");
+
+await sendTelegram(
+"Pesanan ditandai selesai ✅"
+);
+
+  }
 
 }catch(e){}
 
