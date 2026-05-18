@@ -165,10 +165,9 @@ console.log("ORDER ID:", orderId);
 
 if(data.startsWith("start_")){
 
-  const token = await getToken();
-console.log("KIRIM PESAN AWAL:",orderId);
-
 const token = await getToken();
+
+console.log("KIRIM PESAN AWAL:",orderId);
 
 await axios.post(
 `https://www.eldorado.gg/api/orders/${orderId}/messages`,
@@ -184,6 +183,8 @@ Accept:"application/json"
 }
 }
 );
+
+}
 
 }
 
