@@ -80,14 +80,15 @@ res.data.data.length
 
 }catch(err){
 
-console.log(
-"ERROR:",
-err.response?.status
-);
+console.log("FULL ERROR:");
 
-console.log(
-err.response?.data
-);
+console.log(err);
+
+console.log("MESSAGE:");
+console.log(err.message);
+
+console.log("NAME:");
+console.log(err.name);
 
 }
 
