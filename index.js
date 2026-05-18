@@ -73,10 +73,12 @@ headers:{
 
 const orders = res.data.results;
 
-res.data.results.forEach(x=>{
- console.log("STATUS:", x.state);
+// tampilkan semua status
+orders.forEach(x=>{
+ console.log("STATUS:",x);
 });
 
+// filter order aktif
 const activeOrders = orders.filter(
 x =>
 x.state !== "Canceled" &&
@@ -84,10 +86,13 @@ x.state !== "Completed" &&
 x.state !== "Delivered"
 );
 
+// baru hitung setelah difilter
 console.log(
 "TOTAL ORDER AKTIF:",
 activeOrders.length
 );
+
+return activeOrders;
 
 await sendTelegram(
 `Bot hidup ✅
