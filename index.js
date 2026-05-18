@@ -91,14 +91,22 @@ await sendTelegram(
 
 ID: ${order.id}
 
-Status: ${order.state.state}
+Status: ${order.state?.state}
 
-Judul: ${order.offer?.description || "Tidak ada"}
+Judul: ${
+order.offer?.gameTitle ||
+order.offer?.title ||
+order.offer?.description ||
+"Tidak ada"
+}
 
-Buyer: ${order.user?.username || "Tidak diketahui"}`
+Buyer: ${
+order.buyer?.username ||
+order.user?.username ||
+order.username ||
+"Tidak diketahui"
+}`
 );
-
-  }
 }catch(err){
 
 console.log("EMAIL:", process.env.ELDO_EMAIL)
