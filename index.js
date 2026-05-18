@@ -67,15 +67,12 @@ headers:{
 }
 );
 
-const orders = res.data.results || [];
-
-orders.forEach(x=>{
-console.log("STATUS:",x.state?.state)
-})
-
-console.log(
-"TOTAL:",
-orders.length
+const orders = (res.data.results || []).filter(
+x => ![
+"Canceled",
+"Completed",
+"Delivered"
+].includes(x.state?.state)
 );
 
 await sendTelegram(
