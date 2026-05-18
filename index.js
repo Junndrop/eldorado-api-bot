@@ -22,6 +22,9 @@ email:true
 async function getToken(){
 
 console.log("LOGIN...");
+  console.log("EMAIL:", EMAIL)
+console.log("PW ADA:", !!PASSWORD)
+console.log("PANJANG:", PASSWORD.length)
 
 await signIn({
 username:EMAIL.trim(),
