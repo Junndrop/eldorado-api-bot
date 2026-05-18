@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const API_KEY = process.env.API_KEY;
+const BOT_KEY = process.env.API_KEY;
 
 async function test(){
 
@@ -12,25 +12,29 @@ const res = await axios.get(
 "https://www.eldorado.gg/api/orders/me",
 {
 headers:{
-"X-BOT-KEY":API_KEY,
+"User-Agent": BOT_KEY,
 "accept":"application/json"
 }
 }
 );
 
 console.log("SUCCESS");
-console.log(res.data);
+console.log(JSON.stringify(res.data,null,2));
 
 }catch(err){
 
 console.log("STATUS:",
 err.response?.status);
 
-console.log("HEADERS:");
-console.log(err.response?.headers);
-
 console.log("DATA:");
-console.log(err.response?.data);
+
+console.log(
+JSON.stringify(
+err.response?.data,
+null,
+2
+)
+);
 
 }
 
