@@ -4,30 +4,39 @@ const { signIn, fetchAuthSession } = require("aws-amplify/auth");
 
 const EMAIL = process.env.ELDO_EMAIL;
 const PASSWORD = process.env.ELDO_PASSWORD;
+
 const BOT_KEY = process.env.ELDO_BOT_KEY;
 
+const TG_TOKEN = process.env.BOT_TOKEN;
+const CHAT_ID = process.env.CHAT_ID;
+
 Amplify.configure({
-Auth:{
-Cognito:{
-userPoolId:"us-east-2_MlnzCFgHk",
-userPoolClientId:"1956req5ro9drdtbf5i6kis4la",
-loginWith:{
-email:true
-}
-}
-}
+  Auth:{
+    Cognito:{
+      userPoolId:"us-east-2_MlnzCFgHk",
+      userPoolClientId:"1956req5ro9drdtbf5i6kis4la"
+    }
+  }
 });
+
+async function sendTelegram(text){
+
+await axios.post(
+`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`,
+{
+chat_id:CHAT_ID,
+text:text
+});
+
+}
 
 async function getToken(){
 
 console.log("LOGIN...");
-  console.log("EMAIL:", EMAIL)
-console.log("PW ADA:", !!PASSWORD)
-console.log("PANJANG:", PASSWORD.length)
-  
+
 await signIn({
-username: EMAIL,
-password: PASSWORD
+username:EMAIL,
+password:PASSWORD
 });
 
 const session=await fetchAuthSession();
@@ -38,7 +47,6 @@ session.tokens.idToken.toString();
 console.log("TOKEN OK");
 
 return token;
-
 }
 
 async function checkOrders(){
@@ -59,27 +67,32 @@ headers:{
 }
 );
 
-const orders=res.data.results;
-
-const activeOrders=orders.filter(
-x=>![
-"Canceled",
-"Completed",
-"Delivered"
-].includes(x.state.state)
+console.log(
+"TOTAL:",
+res.data.data.length
 );
 
-console.log(
-"TOTAL ORDER AKTIF:",
-activeOrders.length
+await sendTelegram(
+"Bot hidup ✅\nOrder: "+
+res.data.data.length
 );
 
 }catch(err){
 
+console.log("EMAIL:", process.env.ELDO_EMAIL)
+console.log("PASSWORD ADA:", !!process.env.ELDO_PASSWORD)
+console.log("PANJANG PW:", process.env.ELDO_PASSWORD?.length)
+
+console.log("FULL ERROR:");
+
 console.log(err);
 
-}
+console.log("MESSAGE:");
+console.log(err.message);
 
+console.log("NAME:");
+console.log(err.name);
+}
 }
 
 checkOrders();
