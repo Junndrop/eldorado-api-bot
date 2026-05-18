@@ -31,17 +31,25 @@ text:text
 }
 
 async function getToken(){
+const { signIn, fetchAuthSession, signOut } =
+require("aws-amplify/auth");
+
+async function getToken(){
 
 console.log("LOGIN...");
 
+try{
+await signOut();
+}catch(e){}
+
 await signIn({
-username:EMAIL,
-password:PASSWORD
+username: EMAIL,
+password: PASSWORD
 });
 
-const session=await fetchAuthSession();
+const session = await fetchAuthSession();
 
-const token=
+const token =
 session.tokens.idToken.toString();
 
 console.log("TOKEN OK");
