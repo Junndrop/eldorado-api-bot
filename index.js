@@ -24,6 +24,7 @@ console.log("LOGIN...");
   console.log("EMAIL:", EMAIL)
 console.log("PW ADA:", !!PASSWORD)
 console.log("PANJANG:", PASSWORD.length)
+  console.log("PW RAW:", JSON.stringify(PASSWORD))
 
 await signIn({
 username:EMAIL.trim(),
