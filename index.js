@@ -170,7 +170,7 @@ const token = await getToken();
 console.log("KIRIM PESAN AWAL:",orderId);
 
 await axios.post(
-`https://www.eldorado.gg/api/orders/${orderId}/chat`,
+`https://www.eldorado.gg/api/orders/${orderId}/conversation`,
 {
 message:`Hello! Send your Roblox username and please read the description 🙂
 
@@ -195,7 +195,7 @@ const token = await getToken();
 console.log("PESANAN SELESAI:",orderId);
 
 await axios.post(
-`https://www.eldorado.gg/api/orders/${orderId}/chat`,
+`https://www.eldorado.gg/api/orders/${orderId}/conversation`,
 {
 message:`Thank you for your order! I would appreciate it if you left a positive review ⭐`
 },
