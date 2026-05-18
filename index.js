@@ -31,16 +31,20 @@ text:text
 }
 
 async function getToken(){
-const { signIn, fetchAuthSession, signOut } =
-require("aws-amplify/auth");
-
-async function getToken(){
-
-console.log("LOGIN...");
 
 try{
-await signOut();
-}catch(e){}
+const session = await fetchAuthSession();
+
+if(session?.tokens?.idToken){
+console.log("PAKAI TOKEN LAMA");
+return session.tokens.idToken.toString();
+}
+
+}catch(e){
+console.log("BELUM LOGIN");
+}
+
+console.log("LOGIN...");
 
 await signIn({
 username: EMAIL,
@@ -49,12 +53,10 @@ password: PASSWORD
 
 const session = await fetchAuthSession();
 
-const token =
-session.tokens.idToken.toString();
-
 console.log("TOKEN OK");
 
-return token;
+return session.tokens.idToken.toString();
+
 }
 
 async function checkOrders(){
