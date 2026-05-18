@@ -165,6 +165,7 @@ console.log("ORDER ID:", orderId);
 
 if(data.startsWith("start_")){
 
+  const token = await getToken();
 console.log("KIRIM PESAN AWAL:",orderId);
 
 await axios.post(
@@ -213,6 +214,8 @@ console.log("BERHASIL:",res.data);
 
 console.log("GAGAL:");
 console.log(err.response?.data || err.message);
+
+}
 
 }
 
