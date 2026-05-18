@@ -71,26 +71,26 @@ headers:{
 }
 );
 
-const orders = res.data.results;
+ const orders = res.data.results;
 
-// tampilkan semua status
 orders.forEach(x=>{
- console.log("STATUS:",x);
+ console.log("STATUS:",x.state.state);
 });
 
-// filter order aktif
-const activeOrders = orders.filter(
-x =>
-x.state !== "Canceled" &&
-x.state !== "Completed" &&
-x.state !== "Delivered"
+const activeOrders=orders.filter(
+x=>![
+"Canceled",
+"Completed",
+"Delivered"
+].includes(x.state.state)
 );
 
-// baru hitung setelah difilter
 console.log(
 "TOTAL ORDER AKTIF:",
 activeOrders.length
 );
+
+return activeOrders;
 
 return activeOrders;
 
