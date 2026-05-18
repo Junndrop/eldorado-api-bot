@@ -84,6 +84,21 @@ await sendTelegram(
 `Bot hidup ✅
 Total order: ${orders.length}`
 );
+  for(const order of orders){
+
+await sendTelegram(
+`🛒 ORDER MASUK
+
+ID: ${order.id}
+
+Status: ${order.state.state}
+
+Judul: ${order.offer?.description || "Tidak ada"}
+
+Buyer: ${order.user?.username || "Tidak diketahui"}`
+);
+
+  }
 }catch(err){
 
 console.log("EMAIL:", process.env.ELDO_EMAIL)
