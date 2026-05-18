@@ -96,6 +96,8 @@ Buyer: ${order.buyerUsername}
 
 Jumlah: ${order.purchaseQuantity}
 
+Total: ${order.totalPrice?.amount} ${order.totalPrice?.currency}
+
 Status: ${order.state?.state}
 
 ID: ${order.id}`
