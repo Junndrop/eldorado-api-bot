@@ -90,6 +90,7 @@ x => ![
 console.log("TOTAL:", orders.length);
   
 for(const order of orders){
+  if(sentOrders.includes(order.id)) continue;
 
 await sendTelegram(
 `🛒 ORDER MASUK
