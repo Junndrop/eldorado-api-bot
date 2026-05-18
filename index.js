@@ -21,13 +21,16 @@ Amplify.configure({
   }
 });
 
-async function sendTelegram(text){
+async function sendTelegram(text,buttons=null){
 
 await axios.post(
 `https://api.telegram.org/bot${TG_TOKEN}/sendMessage`,
 {
-chat_id:CHAT_ID,
-text:text
+chat_id: CHAT_ID,
+text:text,
+reply_markup: buttons ? {
+inline_keyboard: buttons
+}:undefined
 });
 
 }
