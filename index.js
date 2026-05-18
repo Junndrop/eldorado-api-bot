@@ -195,8 +195,6 @@ const token = await getToken();
 
 console.log("PESANAN SELESAI:",orderId);
 
-const token = await getToken();
-
 await axios.post(
 `https://www.eldorado.gg/api/orders/${orderId}/messages`,
 {
@@ -209,7 +207,8 @@ Accept:"application/json"
 }
 }
 );
-console.log("BERHASIL:",res.data);
+
+console.log("BERHASIL");
 
 }catch(err){
 
@@ -221,7 +220,6 @@ console.log("MSG:",err.message);
 }
 
 }
-
 }
 
 }catch(e){}
