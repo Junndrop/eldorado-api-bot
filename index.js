@@ -213,7 +213,9 @@ console.log("BERHASIL:",res.data);
 }catch(err){
 
 console.log("GAGAL:");
-console.log(err.response?.data || err.message);
+console.log("DATA:",err.response?.data);
+console.log("STATUS:",err.response?.status);
+console.log("MSG:",err.message);
 
 }
 
