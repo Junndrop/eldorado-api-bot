@@ -168,6 +168,8 @@ if(data.startsWith("start_")){
   const token = await getToken();
 console.log("KIRIM PESAN AWAL:",orderId);
 
+const token = await getToken();
+
 await axios.post(
 `https://www.eldorado.gg/api/orders/${orderId}/messages`,
 {
@@ -177,8 +179,8 @@ message:`Hello! Send your Roblox username and please read the description 🙂
 },
 {
 headers:{
-"Authorization":`Bearer ${token}`,
-"Content-Type":"application/json"
+Cookie:`__Host-EldoradoIdToken=${token}`,
+Accept:"application/json"
 }
 }
 );
@@ -193,19 +195,20 @@ const token = await getToken();
 
 console.log("PESANAN SELESAI:",orderId);
 
-const res = await axios.post(
+const token = await getToken();
+
+await axios.post(
 `https://www.eldorado.gg/api/orders/${orderId}/messages`,
 {
 message:`Thank you for your order! I would appreciate it if you left a positive review ⭐`
 },
 {
 headers:{
-"Authorization":`Bearer ${token}`,
-"Content-Type":"application/json"
+Cookie:`__Host-EldoradoIdToken=${token}`,
+Accept:"application/json"
 }
 }
 );
-
 console.log("BERHASIL:",res.data);
 
 }catch(err){
