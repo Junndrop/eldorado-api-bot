@@ -86,6 +86,18 @@ Total order: ${orders.length}`
 );
   for(const order of orders){
 
+const judul =
+order.offer?.gameTitle ||
+order.offer?.title ||
+order.offer?.description ||
+"Tidak ada";
+
+const buyer =
+order.buyer?.username ||
+order.user?.username ||
+order.username ||
+"Tidak diketahui";
+
 await sendTelegram(
 `🛒 ORDER MASUK
 
@@ -93,19 +105,9 @@ ID: ${order.id}
 
 Status: ${order.state?.state}
 
-Judul: ${
-order.offer?.gameTitle ||
-order.offer?.title ||
-order.offer?.description ||
-"Tidak ada"
-}
+Judul: ${judul}
 
-Buyer: ${
-order.buyer?.username ||
-order.user?.username ||
-order.username ||
-"Tidak diketahui"
-}`
+Buyer: ${buyer}`
 );
 }catch(err){
 
