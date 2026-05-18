@@ -112,15 +112,12 @@ console.log(
 activeOrders.length
 );
 
-return activeOrders;
-
-return activeOrders;
-
 await sendTelegram(
 `Bot hidup ✅
 Order aktif: ${activeOrders.length}`
 );
 
+return activeOrders;
 }catch(err){
 
 console.log("EMAIL:", process.env.ELDO_EMAIL)
