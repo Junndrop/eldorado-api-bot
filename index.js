@@ -11,10 +11,13 @@ const TG_TOKEN = process.env.BOT_TOKEN;
 const CHAT_ID = process.env.CHAT_ID;
 
 Amplify.configure({
-Auth:{
-Cognito:{
-userPoolId:"us-east-2_M1nzCFgHK",
-userPoolClientId:"1956req5ro9drdtbf5i6kis4la"
+Auth: {
+Cognito: {
+userPoolId: "us-east-2_MlnzCFgHk",
+userPoolClientId: "1956req5ro9drdtbf5i6kis41a",
+loginWith: {
+email: true
+}
 }
 }
 });
@@ -35,8 +38,8 @@ async function getToken(){
 console.log("LOGIN...");
 
 await signIn({
-username:EMAIL,
-password:PASSWORD
+username: EMAIL.trim(),
+password: PASSWORD.trim()
 });
 
 const session=await fetchAuthSession();
