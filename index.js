@@ -76,8 +76,6 @@ activeOrders.length
 );
 
 return activeOrders;
-}catch(err){
-
 }
 
 checkOrders();
