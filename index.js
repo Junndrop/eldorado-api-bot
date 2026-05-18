@@ -4,7 +4,6 @@ const { signIn, fetchAuthSession } = require("aws-amplify/auth");
 
 const EMAIL = process.env.ELDO_EMAIL;
 const PASSWORD = process.env.ELDO_PASSWORD;
-
 const BOT_KEY = process.env.ELDO_BOT_KEY;
 
 Amplify.configure({
