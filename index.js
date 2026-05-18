@@ -168,15 +168,10 @@ if(data.startsWith("start_")){
 console.log("KIRIM PESAN AWAL:",orderId);
 
 await sendTelegram(
-`Pesan otomatis terkirim ke order:
-${orderId}
-
-Hello! Send your Roblox username and please read the description 🙂
+`Hello! Send your Roblox username and please read the description 🙂
 
 [Bot]`
 );
-
-}
 
 if(data.startsWith("done_")){
 
