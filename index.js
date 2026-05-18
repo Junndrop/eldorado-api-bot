@@ -183,11 +183,8 @@ if(data.startsWith("done_")){
 console.log("PESANAN SELESAI:",orderId);
 
 await sendTelegram(
-`Pesanan selesai:
-${orderId}`
+`Thank you for your order! I would appreciate it if you left a positive review ⭐`
 );
-
-}
 
 }
 
