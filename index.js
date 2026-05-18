@@ -27,8 +27,8 @@ console.log("PANJANG:", PASSWORD.length)
   console.log("PW RAW:", JSON.stringify(PASSWORD))
 
 await signIn({
-username:EMAIL.trim(),
-password:PASSWORD.trim()
+username: EMAIL,
+password: PASSWORD
 });
 
 const session=await fetchAuthSession();
