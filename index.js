@@ -8,7 +8,7 @@ const PASSWORD = process.env.ELDO_PASSWORD;
 const BOT_KEY = process.env.ELDO_BOT_KEY;
 
 const TG_TOKEN = process.env.BOT_TOKEN;
-const CHAT_ID = process.env.CHAT_ID;
+let CHAT_ID = process.env.CHAT_ID;
 
 Amplify.configure({
 Auth: {
@@ -20,6 +20,25 @@ email: true
 }
 }
 }
+});
+
+const TelegramBot = require("node-telegram-bot-api");
+
+const bot = new TelegramBot(TG_TOKEN,{
+ polling:true
+});
+
+bot.onText(/\/start/,msg=>{
+
+CHAT_ID=msg.chat.id
+
+bot.sendMessage(
+msg.chat.id,
+"Bot aktif ✅"
+);
+
+checkOrders()
+
 });
 
 async function getToken(){
