@@ -22,31 +22,6 @@ email: true
 }
 });
 
-const TelegramBot = require("node-telegram-bot-api");
-
-async function sendTelegram(text){
-
-if(!CHAT_ID){
- console.log("CHAT_ID kosong");
- return;
-}
-
-try{
- await axios.post(
- `https://api.telegram.org/bot${TG_TOKEN}/sendMessage`,
- {
-   chat_id: CHAT_ID,
-   text: text
- });
-
- console.log("TELEGRAM TERKIRIM");
-
-}catch(err){
- console.log("ERROR TELEGRAM:");
- console.log(err.response?.data || err.message);
-}
-}
-
 async function getToken(){
 
 console.log("LOGIN...");
@@ -87,22 +62,6 @@ headers:{
 
 return activeOrders;
 }catch(err){
-
-console.log("EMAIL:", process.env.ELDO_EMAIL)
-console.log("PASSWORD ADA:", !!process.env.ELDO_PASSWORD)
-console.log("PANJANG PW:", process.env.ELDO_PASSWORD?.length)
-  
-console.log("FULL ERROR:");
-
-console.log(err);
-
-console.log("MESSAGE:");
-console.log(err.message);
-
-console.log("NAME:");
-console.log(err.name);
-
-}
 
 }
 
