@@ -25,7 +25,6 @@ email: true
 const TelegramBot = require("node-telegram-bot-api");
 
 async function sendTelegram(text){
-async function sendTelegram(text){
 
 if(!CHAT_ID){
  console.log("CHAT_ID kosong");
