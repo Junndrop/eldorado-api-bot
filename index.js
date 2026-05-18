@@ -163,11 +163,31 @@ const orderId = data.split("_")[1];
 console.log("TOMBOL:", data);
 console.log("ORDER ID:", orderId);
 
-if(data.startsWith("start_"))
+if(data.startsWith("start_")){
+
 console.log("KIRIM PESAN AWAL:",orderId);
 
-if(data.startsWith("done_"))
+await sendTelegram(
+`Pesan otomatis terkirim ke order:
+${orderId}
+
+Hello! Send your Roblox username and please read the description 🙂
+
+[Bot]`
+);
+
+}
+
+if(data.startsWith("done_")){
+
 console.log("PESANAN SELESAI:",orderId);
+
+await sendTelegram(
+`Pesanan selesai:
+${orderId}`
+);
+
+}
 
 }
 
