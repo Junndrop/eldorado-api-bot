@@ -75,8 +75,8 @@ orders.length
 );
 
 await sendTelegram(
-"Bot hidup ✅\nOrder: " +
-orders.length
+`Bot hidup ✅
+Total order: ${orders.length}`
 );
 }catch(err){
 
