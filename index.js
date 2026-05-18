@@ -91,8 +91,6 @@ checkOrders();
 
 setInterval(checkOrders,30000);
 
-await sendTelegram("Bot hidup ✅");
-
 for(const order of orders){
 
 await sendTelegram(
