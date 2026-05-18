@@ -103,6 +103,8 @@ Buyer: ${order.buyerUsername}
 
 Jumlah: ${order.purchaseQuantity}
 
+Item: ${order.offerTitle || order.offer?.title || "Tidak diketahui"}
+
 Total: ${order.totalPrice?.amount} ${order.totalPrice?.currency}
 
 Status: ${order.state?.state}
