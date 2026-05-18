@@ -169,9 +169,8 @@ if(data.startsWith("start_")){
 console.log("KIRIM PESAN AWAL:",orderId);
 
 await axios.post(
-'https://www.eldorado.gg/api/messages/send',
+`https://www.eldorado.gg/api/orders/${orderId}/messages`,
 {
-orderId: orderId,
 message:`Hello! Send your Roblox username and please read the description 🙂
 
 [Bot]`
@@ -195,9 +194,8 @@ const token = await getToken();
 console.log("PESANAN SELESAI:",orderId);
 
 const res = await axios.post(
-'https://www.eldorado.gg/api/messages/send',
+`https://www.eldorado.gg/api/orders/${orderId}/messages`,
 {
-orderId:orderId,
 message:`Thank you for your order! I would appreciate it if you left a positive review ⭐`
 },
 {
