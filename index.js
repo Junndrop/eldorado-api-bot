@@ -77,10 +77,11 @@ x => ![
 
 console.log("TOTAL:", orders.length);
 
-await sendTelegram(
-`Bot hidup ✅
-Total order: ${orders.length}`
-);
+checkOrders();
+
+setInterval(checkOrders,30000);
+
+await sendTelegram("Bot hidup ✅");
 
 for(const order of orders){
 
