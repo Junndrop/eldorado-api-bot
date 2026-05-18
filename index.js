@@ -45,14 +45,27 @@ bot.onText(/\/start/,msg=>{
 });
 
 async function sendTelegram(text){
+async function sendTelegram(text){
 
-await axios.post(
-`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`,
-{
-chat_id:CHAT_ID,
-text:text
-});
+if(!CHAT_ID){
+ console.log("CHAT_ID kosong");
+ return;
+}
 
+try{
+ await axios.post(
+ `https://api.telegram.org/bot${TG_TOKEN}/sendMessage`,
+ {
+   chat_id: CHAT_ID,
+   text: text
+ });
+
+ console.log("TELEGRAM TERKIRIM");
+
+}catch(err){
+ console.log("ERROR TELEGRAM:");
+ console.log(err.response?.data || err.message);
+}
 }
 
 async function getToken(){
