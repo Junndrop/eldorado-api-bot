@@ -24,26 +24,6 @@ email: true
 
 const TelegramBot = require("node-telegram-bot-api");
 
-const bot = new TelegramBot(TG_TOKEN,{
- polling:true
-});
-
-console.log("TELEGRAM START");
-
-bot.on("message",(msg)=>{
- console.log(
-   "PESAN MASUK:",
-   msg.text
- );
-});
-
-bot.onText(/\/start/,msg=>{
- bot.sendMessage(
-   msg.chat.id,
-   "Bot aktif ✅"
- );
-});
-
 async function sendTelegram(text){
 async function sendTelegram(text){
 
@@ -104,30 +84,6 @@ headers:{
 "Accept":"application/json"
 }
 }
-);
-
- const orders = res.data.results;
-
-orders.forEach(x=>{
- console.log("STATUS:",x.state.state);
-});
-
-const activeOrders=orders.filter(
-x=>![
-"Canceled",
-"Completed",
-"Delivered"
-].includes(x.state.state)
-);
-
-console.log(
-"TOTAL ORDER AKTIF:",
-activeOrders.length
-);
-
-await sendTelegram(
-`Bot hidup ✅
-Order aktif: ${activeOrders.length}`
 );
 
 return activeOrders;
