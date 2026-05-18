@@ -161,6 +161,9 @@ console.log("KIRIM PESAN AWAL");
 
 if(data.startsWith("done_"))
 console.log("PESANAN SELESAI");
-}catch(e){
+
+}
+
+}catch(e){}
 
 },3000);
