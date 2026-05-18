@@ -71,14 +71,11 @@ headers:{
 }
 );
 
-console.log(
-"TOTAL:",
-res.data.data.length
-);
+console.log("RESPON:");
+console.log(JSON.stringify(res.data,null,2));
 
 await sendTelegram(
-"Bot hidup ✅\nOrder: "+
-res.data.data.length
+"Bot hidup ✅\nAPI tersambung"
 );
 
 }catch(err){
