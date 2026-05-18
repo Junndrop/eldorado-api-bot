@@ -60,6 +60,21 @@ headers:{
 }
 );
 
+const orders = res.data.results;
+
+const activeOrders = orders.filter(
+x => ![
+"Canceled",
+"Completed",
+"Delivered"
+].includes(x.state.state)
+);
+
+console.log(
+"TOTAL ORDER AKTIF:",
+activeOrders.length
+);
+
 return activeOrders;
 }catch(err){
 
