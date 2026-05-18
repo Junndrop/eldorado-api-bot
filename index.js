@@ -120,7 +120,7 @@ ID: ${order.id}`,
 
 }
 
-}catch(err){}
+}catch(err){
 
 console.log("FULL ERROR:");
 console.log(err);
@@ -161,6 +161,6 @@ console.log("KIRIM PESAN AWAL");
 
 if(data.startsWith("done_"))
 console.log("PESANAN SELESAI");
-}catch(e){}
+}catch(e){
 
 },3000);
