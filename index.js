@@ -75,11 +75,14 @@ x => ![
 ].includes(x.state?.state)
 );
 
+console.log("TOTAL:", orders.length);
+
 await sendTelegram(
 `Bot hidup ✅
 Total order: ${orders.length}`
 );
-  for(const order of orders){
+
+for(const order of orders){
 
 await sendTelegram(
 `🛒 ORDER MASUK
@@ -93,7 +96,7 @@ Status: ${order.state?.state}
 ID: ${order.id}`
 );
 
-  }
+}
 }catch(err){
 
 console.log("EMAIL:", process.env.ELDO_EMAIL)
