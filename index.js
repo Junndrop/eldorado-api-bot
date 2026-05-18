@@ -76,6 +76,12 @@ activeOrders.length
 );
 
 return activeOrders;
+
+}catch(err){
+
+console.log(err)
+
 }
 
+}
 checkOrders();
