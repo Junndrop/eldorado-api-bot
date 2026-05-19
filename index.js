@@ -123,10 +123,17 @@ console.log(JSON.stringify(chat.data,null,2));
 }catch(e){
 
 console.log("CHAT ERROR:");
-console.log(e.response?.status);
+console.log("STATUS:", e.response?.status);
+
+console.log("DATA:");
+console.log(
+JSON.stringify(e.response?.data,null,2)
+);
+
+console.log("MESSAGE:");
 console.log(e.message);
 
-}
+  }
 
 }
 
