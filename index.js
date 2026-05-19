@@ -33,7 +33,6 @@ parse_mode:"HTML",
 reply_markup: buttons ? {
 inline_keyboard: buttons
 }:undefined
-
 }
 
 async function getToken(){
