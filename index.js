@@ -97,6 +97,12 @@ console.log("TOTAL:",orders.length);
 
 for(const order of orders){
 
+  const itemName =
+order.orderOfferDetails?.offerTitle ||
+order.orderOfferDetails?.name ||
+order.orderOfferDetails?.gameCategoryTitle ||
+"Tidak diketahui";
+
 console.log("ID:",order.id);
 console.log("BUYER:",order.buyerUsername);
   console.log("CHAT ID:");
