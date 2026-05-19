@@ -107,11 +107,8 @@ order.orderOfferDetails?.gameCategoryTitle ||
 
 console.log("ID:",order.id);
 console.log("BUYER:",order.buyerUsername);
-  
-}
-  }
 
-if(sentOrders.includes(order.id)){
+  if(sentOrders.includes(order.id)){
 continue;
 }
 
@@ -163,33 +160,6 @@ console.log(err.message);
 checkOrders();
 
 setInterval(checkOrders,30000);
-
-setInterval(async()=>{
-
-try{
-
-const token=await getToken();
-
-const res=await axios.get(
-"https://www.eldorado.gg/api/orders/me/seller/orders",
-{
-headers:{
-"User-Agent":BOT_KEY,
-Cookie:`__Host-EldoradoIdToken=${token}`,
-Accept:"application/json"
-}
-}
-);
-
-console.log("ORDER DICEK:",res.data.results?.length);
-
-}catch(e){
-
-console.log("ERROR CHAT:",e.message);
-
-}
-
-},15000);
 
 setInterval(async()=>{
 
