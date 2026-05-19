@@ -147,11 +147,11 @@ await sendTelegram(
 👤 <b>Buyer</b>
 ${order.buyerUsername}
 
-📦 <b>Jumlah</b>
-${order.purchaseQuantity}
-
 🎁 <b>Item</b>
 ${itemName}
+
+📦 <b>Jumlah</b>
+${order.purchaseQuantity}
 
 💵 <b>Total</b>
 ${order.totalPrice?.amount} ${order.totalPrice?.currency}
