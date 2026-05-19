@@ -29,10 +29,10 @@ await axios.post(
 {
 chat_id: CHAT_ID,
 text:text,
+parse_mode:"HTML",
 reply_markup: buttons ? {
 inline_keyboard: buttons
 }:undefined
-});
 
 }
 
