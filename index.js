@@ -114,9 +114,6 @@ console.log("TOTAL:",orders.length);
 
   for(const order of orders){
 
-if(processedOrders.has(order.id)){
-processedOrders.add(order.id);
-
 const itemName =
 order.orderOfferDetails?.offerTitle ||
 "Unknown Item";
@@ -128,15 +125,19 @@ order.conversationDetails?.id ||
 order.talkConversationId ||
 null;
 
-console.log("CONV:",convId);
+
+if(!processedOrders.has(order.id)){
+
+processedOrders.add(order.id);
+
 console.log("KIRIM TELEGRAM...");
 
-    const waktu = new Date(
+const waktu = new Date(
 order.createdDate || order.createdAt
 ).toLocaleString("id-ID",{
 timeZone:"Asia/Jakarta"
 });
-    
+
 await sendTelegram(
 `<b>🛒 ORDER MASUK</b>
 
@@ -153,9 +154,7 @@ ${order.purchaseQuantity}
 ${order.totalPrice?.amount} ${order.totalPrice?.currency}
 
 🕒 Waktu:
-${waktu}
-
-🆔 <code>${order.id}</code>`,
+${waktu}`,
 [
 [
 {text:"✅ Pesanan Selesai",callback_data:`done_${order.id}`}
@@ -164,7 +163,8 @@ ${waktu}
 );
 
 console.log("TELEGRAM TERKIRIM");
-}   
+}
+
 console.log("ID:",order.id);
 console.log("BUYER:",order.buyerUsername);
 
