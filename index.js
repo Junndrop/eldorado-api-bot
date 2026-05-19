@@ -105,6 +105,33 @@ console.log(order.talkJsConversationId);
 console.log("HAS CONVERSATION:");
 console.log(!!order.conversationDetails);
 
+  if(order.talkJsConversationId){
+
+try{
+
+const token=await getToken();
+
+const chat=await axios.get(
+`https://www.eldorado.gg/api/conversations/${order.talkJsConversationId}`,
+{
+headers:{
+Cookie:`__Host-EldoradoIdToken=${token}`,
+Accept:"application/json"
+}
+}
+);
+
+console.log("CHAT OK");
+console.log(chat.status);
+
+}catch(err){
+
+console.log("CHAT ERROR:");
+console.log(err.response?.status);
+
+}
+  }
+
 if(sentOrders.includes(order.id)){
 continue;
 }
