@@ -96,41 +96,19 @@ x => ![
 
 console.log("TOTAL:", orders.length);
 
+  console.log("TOTAL:", orders.length);
+
 for(const order of orders){
 
-console.log("STATE:");
-console.log(order.state);
+console.log("ID:", order.id);
+console.log("BUYER:", order.buyerUsername);
+console.log("STATUS:", order.state?.state);
 
-console.log("TALKJS:");
-console.log(order.talkJsConversationId);
-
-console.log("CONVERSATION:");
-console.log(
-Object.keys(
-order.conversationDetails || {}
-)
-);
-
-console.log("CONVERSATION RAW:");
-console.log(
-JSON.stringify(
-order.conversationDetails,
-null,
-1
-)
-);
-
+if(sentOrders.includes(order.id)){
+continue;
 }
 
-console.log("OFFER:");
-console.log(
-JSON.stringify(
-order.orderOfferDetails,
-null,
-2
-));
-
-}
+sentOrders.push(order.id);
 
 await sendTelegram(
 `🛒 ORDER MASUK
@@ -139,27 +117,19 @@ Buyer: ${order.buyerUsername}
 
 Jumlah: ${order.purchaseQuantity}
 
-Item: ${order.offerTitle || order.offer?.title || "Tidak diketahui"}
+Total:
+${order.totalPrice?.amount}
+${order.totalPrice?.currency}
 
-Total: ${order.totalPrice?.amount} ${order.totalPrice?.currency}
+Status:
+${order.state?.state}
 
-Status: ${order.state?.state}
-
-ID: ${order.id}`,
-[
-[
-{text:"📨 Kirim Pesan Awal",callback_data:`start_${order.id}`}
-],
-[
-{text:"✅ Pesanan Selesai",callback_data:`done_${order.id}`}
-]
-]
+ID:
+${order.id}`
 );
 
 }
-
-}catch(err){
-
+  
 console.log("FULL ERROR:");
 console.log(err);
 
