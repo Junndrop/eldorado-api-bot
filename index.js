@@ -144,24 +144,34 @@ continue;
 
 sentOrders.push(order.id);
 
-await sendTelegram(
-`🛒 ORDER MASUK
+  await sendTelegram(
+`<b>🛒 ORDER MASUK</b>
 
-Buyer: ${order.buyerUsername}
+👤 <b>Buyer</b>
+${order.buyerUsername}
 
-Jumlah: ${order.purchaseQuantity}
+📦 <b>Jumlah</b>
+${order.purchaseQuantity}
 
-Item: ${itemName}
+🎁 <b>Item</b>
+${itemName}
 
-Total:
-${order.totalPrice?.amount}
-${order.totalPrice?.currency}
+💵 <b>Total</b>
+${order.totalPrice?.amount} ${order.totalPrice?.currency}
 
-Status:
+🟢 <b>Status</b>
 ${order.state?.state}
 
-ID:
-${order.id}`
+🆔 <b>ID</b>
+<code>${order.id}</code>`,
+[
+[
+{text:"✉️ Kirim Pesan Awal",callback_data:`start_${order.id}`}
+],
+[
+{text:"✅ Pesanan Selesai",callback_data:`done_${order.id}`}
+]
+]
 );
 
 }
