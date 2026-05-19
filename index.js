@@ -182,8 +182,25 @@ Accept:"application/json"
 }
 );
 
-console.log("PESAN:");
-console.log(test.data);
+console.log(
+"PESAN KEYS:"
+);
+
+console.log(
+Object.keys(test.data || {})
+);
+
+console.log(
+"FULL:"
+);
+
+console.log(
+JSON.stringify(
+test.data,
+null,
+2
+)
+);
 
 }catch(err){
 
