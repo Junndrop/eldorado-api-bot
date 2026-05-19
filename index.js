@@ -115,6 +115,18 @@ null,
 2
 )
 );
+
+  const req =
+res.data.results?.[0]?.userRequestDetails;
+
+console.log("REQ KEYS:");
+
+if(req){
+console.log(Object.keys(req));
+}else{
+console.log("KOSONG");
+}
+  
 const convId = res.data.results?.[0]?.talkJsConversationId;
 
 console.log("CHAT ID:", convId);
