@@ -192,6 +192,13 @@ console.log(err.message);
 checkOrders();
 
 setInterval(checkOrders,30000);
+
+setInterval(async()=>{
+
+console.log("CEK CHAT BUYER");
+
+},15000);
+
 setInterval(async()=>{
 
 try{
