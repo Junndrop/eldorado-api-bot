@@ -3,7 +3,7 @@ const { Amplify } = require("aws-amplify");
 const { signIn, fetchAuthSession } = require("aws-amplify/auth");
 
 const processedOrders = new Set();
-const seenConversations = new Set();
+const lastMessageCache = {};
 const messageCache = {};
 
 const EMAIL = process.env.ELDO_EMAIL;
@@ -168,17 +168,25 @@ console.log("ID:",order.id);
 console.log("BUYER:",order.buyerUsername);
 
     const convId = global.lastConv;
-
-console.log("CONV ID:",convId);
+const convId = global.lastConv;
 
 if(!convId){
-console.log("CHAT ID TIDAK ADA");
 continue;
 }
 
-if(!seenConversations.has(convId)){
+const stateLog =
+JSON.stringify(order.stateLogs || []);
 
-seenConversations.add(convId);
+if(!lastMessageCache[convId]){
+
+lastMessageCache[convId]=stateLog;
+
+continue;
+}
+
+if(lastMessageCache[convId]!==stateLog){
+
+lastMessageCache[convId]=stateLog;
 
 await sendTelegram(
 `📩 CHAT MASUK
