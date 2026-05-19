@@ -223,9 +223,9 @@ const token = await getToken();
 console.log("KIRIM PESAN AWAL:",orderId);
 
 await axios.post(
-`https://www.eldorado.gg/api/talkjs/conversations/${global.lastConv}/messages`,
+`https://www.eldorado.gg/api/conversations/${global.lastConv}/messages`,
 {
-text:`Hello! Send your Roblox username and please read description 🙂`
+message:`Hello! Send your Roblox username and please read description 🙂`
 },
 {
 headers:{
