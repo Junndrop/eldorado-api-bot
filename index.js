@@ -127,6 +127,10 @@ console.log(order.talkJsConversationId);
 
 console.log("HAS CONVERSATION:");
 console.log(!!order.conversationDetails);
+  console.log("URL:");
+console.log(
+`https://www.eldorado.gg/api/conversations/${convId}/messages`
+);
 
   if(order.talkJsConversationId){
 
