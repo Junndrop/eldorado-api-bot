@@ -97,7 +97,7 @@ console.log("TOTAL:",orders.length);
 
 for(const order of orders){
 
-  const itemName =
+const itemName =
 order.orderOfferDetails?.offerTitle ||
 order.orderOfferDetails?.name ||
 order.orderOfferDetails?.gameCategoryTitle ||
@@ -105,7 +105,7 @@ order.orderOfferDetails?.gameCategoryTitle ||
 
 console.log("ID:",order.id);
 console.log("BUYER:",order.buyerUsername);
-  console.log("CHAT ID:");
+console.log("CHAT ID:");
 console.log(order.talkJsConversationId);
 
 console.log("HAS CONVERSATION:");
@@ -145,7 +145,6 @@ continue;
 sentOrders.push(order.id);
 
 await sendTelegram(
-await sendTelegram(
 `🛒 ORDER MASUK
 
 Buyer: ${order.buyerUsername}
@@ -154,6 +153,7 @@ Jumlah: ${order.purchaseQuantity}
 
 Item: ${itemName}
 
+Total:
 Total:
 ${order.totalPrice?.amount}
 ${order.totalPrice?.currency}
