@@ -115,9 +115,6 @@ console.log("TOTAL:",orders.length);
   for(const order of orders){
 
 if(processedOrders.has(order.id)){
-continue;
-}
-
 processedOrders.add(order.id);
 
 const itemName =
@@ -132,12 +129,7 @@ order.talkConversationId ||
 null;
 
 console.log("CONV:",convId);
-    console.log("updatedAt:",order.updatedAt);
-console.log("lastMessageDate:",order.lastMessageDate);
-console.log("lastActivity:",order.lastActivity);
-console.log("modifiedDate:",order.modifiedDate);
-
-    console.log("KIRIM TELEGRAM...");
+console.log("KIRIM TELEGRAM...");
 
     const waktu = new Date(
 order.createdDate || order.createdAt
@@ -171,8 +163,8 @@ ${waktu}
 ]
 );
 
-    console.log("TELEGRAM TERKIRIM");
-    
+console.log("TELEGRAM TERKIRIM");
+}   
 console.log("ID:",order.id);
 console.log("BUYER:",order.buyerUsername);
 
@@ -196,6 +188,7 @@ headers:{
 
 const lastText =
 chatRes.data?.lastMessage?.body || "";
+console.log("PESAN:",lastText);
 
 if(!lastMessageCache[convId]){
 
@@ -238,8 +231,6 @@ console.log(err.response?.data || err);
 
 console.log("MESSAGE:");
 console.log(err.message);
-  console.log("LAST:",lastActivity);
-
 }
 }
 
