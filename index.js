@@ -69,11 +69,11 @@ async function checkOrders(){
 
 try{
 
-const token=await getToken();
+const token = await getToken();
 
 console.log("TOKEN ADA");
 
-const res=await axios.get(
+const res = await axios.get(
 "https://www.eldorado.gg/api/orders/me/seller/orders",
 {
 headers:{
@@ -84,25 +84,21 @@ headers:{
 }
 }
 );
-  
-  console.log("ORDER KEYS:");
-co
-x => ![
+
+const orders=(res.data.results||[]).filter(
+x=>![
 "Canceled",
 "Completed",
 "Delivered"
 ].includes(x.state?.state)
 );
 
-console.log("TOTAL:", orders.length);
-
-  console.log("TOTAL:", orders.length);
+console.log("TOTAL:",orders.length);
 
 for(const order of orders){
 
-console.log("ID:", order.id);
-console.log("BUYER:", order.buyerUsername);
-console.log("STATUS:", order.state?.state);
+console.log("ID:",order.id);
+console.log("BUYER:",order.buyerUsername);
 
 if(sentOrders.includes(order.id)){
 continue;
@@ -129,18 +125,16 @@ ${order.id}`
 );
 
 }
-  
+
+}catch(err){
+
 console.log("FULL ERROR:");
-console.log(err);
+console.log(err.response?.data || err);
 
 console.log("MESSAGE:");
 console.log(err.message);
 
-console.log("NAME:");
-console.log(err.name);
-
 }
-
 }
 
 checkOrders();
