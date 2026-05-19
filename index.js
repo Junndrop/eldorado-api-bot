@@ -166,20 +166,38 @@ console.log("BUYER:",order.buyerUsername);
 
 if(!convId) continue;
 
+    console.log("TEST URL 1:",
+`https://www.eldorado.gg/api/talkjs/conversations/${chatId}`);
+
+console.log("TEST URL 2:",
+`https://www.eldorado.gg/api/talkjs/conversations/${chatId}/messages`);
+
+console.log("TEST URL 3:",
+`https://www.eldorado.gg/api/conversations/${chatId}`);
+
+console.log("TEST URL 4:",
+`https://www.eldorado.gg/api/conversations/${chatId}/messages`);
+
 try{
 
-const token=await getToken();
-
-const msgRes = await axios.get(
-`https://www.eldorado.gg/api/conversations/${convId}/messages`,
+const test=await axios.get(
+`https://www.eldorado.gg/api/talkjs/conversations/${chatId}`,
 {
 headers:{
-Cookie:`__Host-EldoradoIdToken=${token}`,
-Accept:"application/json"
-},
-timeout:10000
+Cookie:`__Host-EldoradoIdToken=${token}`
+}
 }
 );
+
+console.log("HASIL:");
+console.log(test.data);
+
+}catch(e){
+
+console.log("STATUS:",e.response?.status);
+console.log("DATA:",e.response?.data);
+
+}
 
 const msgs = msgRes.data.results || [];
 
