@@ -107,67 +107,7 @@ order.orderOfferDetails?.gameCategoryTitle ||
 
 console.log("ID:",order.id);
 console.log("BUYER:",order.buyerUsername);
-  console.log("RAW USER REQUEST:");
-console.log(
-JSON.stringify(
-order.userRequestDetails,
-null,
-2
-)
-);
-
-  const req =
-res.data.results?.[0]?.userRequestDetails;
-
-console.log("REQ KEYS:");
-
-if(req){
-console.log(Object.keys(req));
-}else{
-console.log("KOSONG");
-}
   
-const convId = res.data.results?.[0]?.talkJsConversationId;
-
-console.log("CHAT ID:", convId);
-
-console.log(
-"https://www.eldorado.gg/api/conversations/" +
-convId
-);
-console.log(order.talkJsConversationId);
-
-console.log("HAS CONVERSATION:");
-console.log(!!order.conversationDetails);
-  console.log("URL:");
-console.log(
-`https://www.eldorado.gg/api/conversations/${convId}/messages`
-);
-
-  if(order.talkJsConversationId){
-
-try{
-
-const token=await getToken();
-
-const chat=await axios.get(
-`https://www.eldorado.gg/api/conversations/${order.talkJsConversationId}`,
-{
-headers:{
-Cookie:`__Host-EldoradoIdToken=${token}`,
-Accept:"application/json"
-}
-}
-);
-
-console.log("CHAT OK");
-console.log(chat.status);
-
-}catch(err){
-
-console.log("CHAT ERROR:");
-console.log(err.response?.status);
-
 }
   }
 
