@@ -71,6 +71,8 @@ try{
 
 const token=await getToken();
 
+console.log("TOKEN ADA");
+
 const res=await axios.get(
 "https://www.eldorado.gg/api/orders/me/seller/orders",
 {
@@ -82,6 +84,8 @@ headers:{
 }
 }
 );
+  
+  console.log(JSON.stringify(res.data,null,2));
 
 const orders = (res.data.results || []).filter(
 x => ![
