@@ -111,6 +111,14 @@ x=>![
 
 console.log("TOTAL:",orders.length);
 
+  console.log(
+"ORDER KEYS:"
+);
+
+console.log(
+Object.keys(orders[0] || {})
+);
+
 for(const order of orders){
 
 if(processedOrders.has(order.id)){
