@@ -134,9 +134,16 @@ null;
 console.log("CONV:",convId);
 
     console.log("KIRIM TELEGRAM...");
+
+    const waktu = new Date().toLocaleString("id-ID",{
+timeZone:"Asia/Jakarta"
+});
     
 await sendTelegram(
 `<b>🛒 ORDER MASUK</b>
+
+🕒 <b>Waktu</b>
+${waktu}
 
 👤 <b>Buyer</b>
 ${order.buyerUsername}
@@ -186,8 +193,15 @@ lastMessageCache[convId]=lastActivity;
 
 lastMessageCache[convId]=lastActivity;
 
+  const waktu = new Date().toLocaleString("id-ID",{
+timeZone:"Asia/Jakarta"
+});
+  
 await sendTelegram(
 `📩 CHAT MASUK
+
+🕒 Waktu:
+${waktu}
 
 👤 Buyer:
 ${order.buyerUsername}
