@@ -202,11 +202,8 @@ await sendTelegram(
 👤 Buyer:
 ${order.buyerUsername}
 
-🕒 Waktu:
-${waktu}
-
-🆔
-${order.id}`
+🎁 Item:
+${itemName}`
 );
 
 console.log("NOTIF CHAT TERKIRIM");
