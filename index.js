@@ -178,16 +178,19 @@ console.log("CHAT ID TIDAK ADA");
 continue;
 }
     console.log("TEST URL 1:",
-`https://www.eldorado.gg/api/talkjs/conversations/${chatId}`);
+`https://www.eldorado.gg/api/talkjs/conversations/${convId}`);
 
 console.log("TEST URL 2:",
-`https://www.eldorado.gg/api/talkjs/conversations/${chatId}/messages`);
+`https://www.eldorado.gg/api/talkjs/conversations/${convId}/messages`);
 
 console.log("TEST URL 3:",
-`https://www.eldorado.gg/api/conversations/${chatId}`);
+`https://www.eldorado.gg/api/conversations/${convId}`);
 
 console.log("TEST URL 4:",
-`https://www.eldorado.gg/api/conversations/${chatId}/messages`);
+`https://www.eldorado.gg/api/conversations/${convId}/messages`);
+
+const test=await axios.get(
+`https://www.eldorado.gg/api/talkjs/conversations/${convId}`,
 
 try{
 
@@ -207,28 +210,6 @@ console.log(test.data);
 
 console.log("STATUS:",e.response?.status);
 console.log("DATA:",e.response?.data);
-
-}
-
-const msgs = msgRes.data.results || [];
-
-if(msgs.length){
-
-const lastMsg = msgs[msgs.length-1];
-
-if(messageCache[convId] !== lastMsg.id){
-
-messageCache[convId]=lastMsg.id;
-
-await sendTelegram(
-`💬 CHAT BARU
-
-👤 ${order.buyerUsername}
-
-${lastMsg.text || "(kosong)"}`
-);
-
-console.log("NOTIF CHAT TERKIRIM");
 
 }
 
