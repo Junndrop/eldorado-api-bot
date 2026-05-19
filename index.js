@@ -141,7 +141,19 @@ console.log("BUYER:",order.buyerUsername);
 );
 
 console.log(
-order.conversationDetails
+JSON.stringify(
+order.conversationDetails,
+null,
+2
+)
+);
+
+console.log(
+"TALKJS:"
+);
+
+console.log(
+order.talkJsConversationId
 );
 
 const convId =
