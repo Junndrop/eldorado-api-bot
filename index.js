@@ -107,6 +107,14 @@ order.orderOfferDetails?.gameCategoryTitle ||
 
 console.log("ID:",order.id);
 console.log("BUYER:",order.buyerUsername);
+  console.log("RAW USER REQUEST:");
+console.log(
+JSON.stringify(
+order.userRequestDetails,
+null,
+2
+)
+);
 console.log("CHAT ID:");
 console.log(order.talkJsConversationId);
 
