@@ -132,6 +132,20 @@ console.log("BUYER:",order.buyerUsername);
 
 console.log("CHAT:",convId);
 
+  console.log(
+"STATE:",
+res.data.results?.[0]?.state
+);
+
+console.log(
+"STATE LOG:",
+JSON.stringify(
+res.data.results?.[0]?.stateLogs,
+null,
+2
+)
+);
+
   if(convId){
 
 try{
