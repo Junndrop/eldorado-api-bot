@@ -24,17 +24,29 @@ Amplify.configure({
 
 async function sendTelegram(text,buttons=null){
 
+try{
+
 await axios.post(
 `https://api.telegram.org/bot${TG_TOKEN}/sendMessage`,
 {
-chat_id: CHAT_ID,
+chat_id:CHAT_ID,
 text:text,
 parse_mode:"HTML",
-reply_markup: buttons ? {
-inline_keyboard: buttons
+reply_markup:buttons ? {
+inline_keyboard:buttons
 }:undefined
+},
+{
+timeout:10000
 }
 );
+
+}catch(err){
+
+console.log("TELEGRAM GAGAL:");
+console.log(err.code || err.message);
+
+}
 
 }
 
