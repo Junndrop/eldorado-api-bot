@@ -108,59 +108,34 @@ console.log(res.data.results?.[0]?.talkJsConversationId);
 
 if(convId){
 
-const tests = [
+console.log("CONV ID:",convId);
 
-`https://www.eldorado.gg/api/messages/${convId}`,
-
-`https://www.eldorado.gg/api/chat/${convId}`,
-
-`https://www.eldorado.gg/api/talkjs/${convId}`,
-
-`https://www.eldorado.gg/api/conversation/${convId}`,
-
-`https://www.eldorado.gg/api/conversations/${convId}/messages`,
-
-`https://www.eldorado.gg/api/messages/conversation/${convId}`
-
-];
-
-for(const url of tests){
-
-try{
-
-console.log("TEST:",url);
-
-const r = await axios.get(
-url,
-{
-headers:{
-"User-Agent":BOT_KEY,
-Cookie:`__Host-EldoradoIdToken=${token}`,
-Accept:"application/json"
-}
-}
-);
-
-console.log("BERHASIL:");
-console.log(url);
-
+console.log("CONVERSATION DETAILS RAW:");
 console.log(
-JSON.stringify(r.data,null,2)
+JSON.stringify(
+res.data.results?.[0]?.conversationDetails,
+null,
+2
+)
 );
 
-break;
-
-}catch(e){
-
-console.log("GAGAL:",url);
+console.log("USER REQUEST:");
 console.log(
-"STATUS:",
-e.response?.status
+JSON.stringify(
+res.data.results?.[0]?.userRequestDetails,
+null,
+2
+)
 );
 
-}
-
-}
+console.log("OFFER:");
+console.log(
+JSON.stringify(
+res.data.results?.[0]?.orderOfferDetails,
+null,
+2
+)
+);
 
 }
 
