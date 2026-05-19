@@ -111,7 +111,23 @@ x=>![
 
 console.log("TOTAL:",orders.length);
 
-  await sendTelegram(
+for(const order of orders){
+
+if(processedOrders.has(order.id)){
+continue;
+}
+
+processedOrders.add(order.id);
+
+const itemName =
+order.orderOfferDetails?.offerTitle ||
+"Unknown Item";
+
+  global.lastConv =
+order.talkJsConversationId ||
+order.talkJsConversationId;
+  
+await sendTelegram(
 `<b>🛒 ORDER MASUK</b>
 
 👤 <b>Buyer</b>
@@ -129,8 +145,7 @@ ${order.totalPrice?.amount} ${order.totalPrice?.currency}
 🟢 <b>Status</b>
 ${order.state?.state}
 
-🆔 <b>ID</b>
-<code>${order.id}</code>`,
+🆔 <code>${order.id}</code>`,
 [
 [
 {text:"✉️ Kirim Pesan Awal",callback_data:`start_${order.id}`}
