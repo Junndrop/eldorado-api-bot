@@ -139,6 +139,11 @@ console.log("CHAT:",convId);
 global.lastConv = convId;
 
   }
+
+  console.log(
+"LAST CONV:",
+global.lastConv
+);
   
   await sendTelegram(
 `<b>🛒 ORDER MASUK</b>
