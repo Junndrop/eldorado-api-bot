@@ -111,73 +111,6 @@ x=>![
 
 console.log("TOTAL:",orders.length);
 
-  console.log(
-"ORDER KEYS:"
-);
-
-console.log(
-Object.keys(orders[0] || {})
-);
-
-for(const order of orders){
-
-if(processedOrders.has(order.id)){
-continue;
-}
-
-processedOrders.add(order.id);
-
-const itemName =
-order.orderOfferDetails?.offerTitle ||
-order.orderOfferDetails?.name ||
-order.orderOfferDetails?.gameCategoryTitle ||
-"Tidak diketahui";
-
-console.log("ID:",order.id);
-console.log("BUYER:",order.buyerUsername);
-
-  console.log(
-"CONV DETAILS:"
-);
-
-console.log(
-JSON.stringify(
-order.conversationDetails,
-null,
-2
-)
-);
-
-console.log(
-"TALKJS:"
-);
-
-console.log(
-order.talkJsConversationId
-);
-
-const convId =
-order.conversationDetails?.id ||
-order.conversationDetails?.conversationId ||
-order.talkJsConversationId;
-
-console.log(
-"TALKJS:",
-order.talkJsConversationId
-);
-console.log("CHAT:",convId);
-
-  if(convId){
-
-global.lastConv = convId;
-
-  }
-
-  console.log(
-"LAST CONV:",
-global.lastConv
-);
-
   await sendTelegram(
 `<b>🛒 ORDER MASUK</b>
 
@@ -254,16 +187,15 @@ const token = await getToken();
 console.log("KIRIM PESAN AWAL:",orderId);
 
 await axios.post(
-`https://www.eldorado.gg/api/orders/${orderId}/messages/send`,
+`https://www.eldorado.gg/api/talkjs/conversations/${global.lastConv}/messages`,
 {
-message:`Hello! Send your Roblox username and please read the description 🙂
-
-[Bot]`
+text:`Hello! Send your Roblox username and please read description 🙂`
 },
 {
 headers:{
 Cookie:`__Host-EldoradoIdToken=${token}`,
-Accept:"application/json"
+Accept:"application/json",
+"Content-Type":"application/json"
 }
 }
 );
