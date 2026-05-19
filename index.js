@@ -93,8 +93,14 @@ console.log(res.data.results?.[0]?.state);
 
 console.log("STATE LOGS:");
 console.log(res.data.results?.[0]?.stateLogs);
-  console.log("CONVERSATION:");
-console.log(res.data.results?.[0]?.conversationDetails);
+  console.log("CONVERSATION RAW:");
+console.log(
+JSON.stringify(
+res.data.results?.[0]?.conversationDetails,
+null,
+2
+)
+);
 
 console.log("TALKJS:");
 console.log(res.data.results?.[0]?.talkJsConversationId);
