@@ -192,10 +192,15 @@ lastMessageCache[convId]=lastActivity;
 
 lastMessageCache[convId]=lastActivity;
 
-  const waktu = new Date().toLocaleString("id-ID",{
+  const waktu = new Date(
+order.lastMessageDate ||
+order.updatedAt ||
+order.modifiedDate ||
+Date.now()
+).toLocaleString("id-ID",{
 timeZone:"Asia/Jakarta"
 });
-  
+
 await sendTelegram(
 `📩 CHAT MASUK
 
@@ -203,7 +208,10 @@ await sendTelegram(
 ${order.buyerUsername}
 
 🎁 Item:
-${itemName}`
+${itemName}
+
+🕒 Waktu:
+${waktu}`
 );
 
 console.log("NOTIF CHAT TERKIRIM");
