@@ -111,7 +111,7 @@ x=>![
 
 console.log("TOTAL:",orders.length);
 
-for(const order of orders){
+  for(const order of orders){
 
 if(processedOrders.has(order.id)){
 continue;
@@ -123,10 +123,8 @@ const itemName =
 order.orderOfferDetails?.offerTitle ||
 "Unknown Item";
 
-  global.lastConv =
-order.talkJsConversationId ||
-order.talkJsConversationId;
-  
+global.lastConv = order.talkJsConversationId;
+
 await sendTelegram(
 `<b>🛒 ORDER MASUK</b>
 
@@ -156,7 +154,10 @@ ${order.state?.state}
 ]
 );
 
-}
+console.log("ID:",order.id);
+console.log("BUYER:",order.buyerUsername);
+
+  }
 
 }catch(err){
 
