@@ -217,6 +217,8 @@ Accept:"application/json"
 }
 );
 
+  console.log("PESAN AWAL BERHASIL");
+
 }
 
 if(data.startsWith("done_")){
