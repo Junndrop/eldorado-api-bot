@@ -12,7 +12,6 @@ const BOT_KEY = process.env.ELDO_BOT_KEY;
 const TG_TOKEN = process.env.BOT_TOKEN;
 const CHAT_ID = process.env.CHAT_ID;
 
-let sentOrders = [];
 let updateId = 0;
 
 Amplify.configure({
@@ -127,13 +126,7 @@ order.orderOfferDetails?.gameCategoryTitle ||
 
 console.log("ID:",order.id);
 console.log("BUYER:",order.buyerUsername);
-
-  if(sentOrders.includes(order.id)){
-continue;
-}
-
-sentOrders.push(order.id);
-
+  
   await sendTelegram(
 `<b>🛒 ORDER MASUK</b>
 
