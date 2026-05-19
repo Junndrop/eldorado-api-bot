@@ -108,38 +108,59 @@ console.log(res.data.results?.[0]?.talkJsConversationId);
 
 if(convId){
 
-console.log("AMBIL CHAT:",convId);
+const tests = [
+
+`https://www.eldorado.gg/api/messages/${convId}`,
+
+`https://www.eldorado.gg/api/chat/${convId}`,
+
+`https://www.eldorado.gg/api/talkjs/${convId}`,
+
+`https://www.eldorado.gg/api/conversation/${convId}`,
+
+`https://www.eldorado.gg/api/conversations/${convId}/messages`,
+
+`https://www.eldorado.gg/api/messages/conversation/${convId}`
+
+];
+
+for(const url of tests){
 
 try{
 
-const chat = await axios.get(
-`https://www.eldorado.gg/api/conversations/${convId}`,
+console.log("TEST:",url);
+
+const r = await axios.get(
+url,
 {
 headers:{
 "User-Agent":BOT_KEY,
-"Cookie":`__Host-EldoradoIdToken=${token}`,
-"Accept":"application/json"
+Cookie:`__Host-EldoradoIdToken=${token}`,
+Accept:"application/json"
 }
 }
 );
 
-console.log("CHAT DATA:");
-console.log(JSON.stringify(chat.data,null,2));
+console.log("BERHASIL:");
+console.log(url);
+
+console.log(
+JSON.stringify(r.data,null,2)
+);
+
+break;
 
 }catch(e){
 
-console.log("CHAT ERROR:");
-console.log("STATUS:", e.response?.status);
-
-console.log("DATA:");
+console.log("GAGAL:",url);
 console.log(
-JSON.stringify(e.response?.data,null,2)
+"STATUS:",
+e.response?.status
 );
 
-console.log("MESSAGE:");
-console.log(e.message);
+}
 
-  }
+}
 
 }
 
