@@ -142,7 +142,7 @@ timeZone:"Asia/Jakarta"
 });
     
 await sendTelegram(
-`<b>🛒 ORDER MASUK</b>
+`<b>🛒 ORDER MASUK</b> ${waktu}
 
 👤 <b>Buyer</b>
 ${order.buyerUsername}
@@ -155,9 +155,6 @@ ${itemName}
 
 💵 <b>Total</b>
 ${order.totalPrice?.amount} ${order.totalPrice?.currency}
-
-🕒 <b>Waktu</b>
-${waktu}
 
 🆔 <code>${order.id}</code>`,
 [
