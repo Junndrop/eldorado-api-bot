@@ -116,6 +116,10 @@ null,
 )
 );
 console.log("CHAT ID:");
+  console.log(
+"https://www.eldorado.gg/api/conversations/" +
+convId
+);
 console.log(order.talkJsConversationId);
 
 console.log("HAS CONVERSATION:");
