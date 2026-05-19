@@ -195,7 +195,28 @@ setInterval(checkOrders,30000);
 
 setInterval(async()=>{
 
-console.log("CEK CHAT BUYER");
+try{
+
+const token=await getToken();
+
+const res=await axios.get(
+"https://www.eldorado.gg/api/orders/me/seller/orders",
+{
+headers:{
+"User-Agent":BOT_KEY,
+Cookie:`__Host-EldoradoIdToken=${token}`,
+Accept:"application/json"
+}
+}
+);
+
+console.log("ORDER DICEK:",res.data.results?.length);
+
+}catch(e){
+
+console.log("ERROR CHAT:",e.message);
+
+}
 
 },15000);
 
