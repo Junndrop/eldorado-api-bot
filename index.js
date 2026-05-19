@@ -181,27 +181,31 @@ console.log("CHAT ID TIDAK ADA");
 continue;
 }
 
-const lastActivity =
-order.updatedAt ||
-order.lastMessageDate ||
-order.lastActivity ||
-order.modifiedDate ||
-"";
+try{
+
+const chatRes = await axios.get(
+`https://www.eldorado.gg/api/talkjs/conversations/${convId}`,
+{
+headers:{
+"User-Agent":BOT_KEY,
+"Cookie":`__Host-EldoradoIdToken=${token}`,
+"Accept":"application/json"
+}
+}
+);
+
+const lastText =
+chatRes.data?.lastMessage?.body || "";
 
 if(!lastMessageCache[convId]){
 
-lastMessageCache[convId]=lastActivity;
+lastMessageCache[convId]=lastText;
 
-}else if(lastMessageCache[convId]!==lastActivity){
+}else if(lastMessageCache[convId]!==lastText){
 
-lastMessageCache[convId]=lastActivity;
+lastMessageCache[convId]=lastText;
 
-  const waktu = new Date(
-order.lastMessageDate ||
-order.updatedAt ||
-order.modifiedDate ||
-Date.now()
-).toLocaleString("id-ID",{
+const waktu = new Date().toLocaleString("id-ID",{
 timeZone:"Asia/Jakarta"
 });
 
@@ -219,6 +223,12 @@ ${waktu}`
 );
 
 console.log("NOTIF CHAT TERKIRIM");
+}
+
+}catch(e){
+
+console.log("CEK CHAT GAGAL");
+console.log(e.response?.status);
 }
   }
 }catch(err){
