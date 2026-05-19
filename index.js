@@ -98,6 +98,37 @@ console.log(res.data.results?.[0]?.conversationDetails);
 
 console.log("TALKJS:");
 console.log(res.data.results?.[0]?.talkJsConversationId);
+  const convId = res.data.results?.[0]?.talkJsConversationId;
+
+if(convId){
+
+console.log("AMBIL CHAT:",convId);
+
+try{
+
+const chat = await axios.get(
+`https://www.eldorado.gg/api/conversations/${convId}`,
+{
+headers:{
+"User-Agent":BOT_KEY,
+"Cookie":`__Host-EldoradoIdToken=${token}`,
+"Accept":"application/json"
+}
+}
+);
+
+console.log("CHAT DATA:");
+console.log(JSON.stringify(chat.data,null,2));
+
+}catch(e){
+
+console.log("CHAT ERROR:");
+console.log(e.response?.status);
+console.log(e.message);
+
+}
+
+}
 
 const orders = (res.data.results || []).filter(
 x => ![
