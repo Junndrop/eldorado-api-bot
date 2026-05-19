@@ -171,7 +171,14 @@ try{
 const token=await getToken();
 
 const msgRes=await axios.get(
-`https://www.eldorado.gg/api/talkjs/conversations/${convId}/messages`,
+`https://www.eldorado.gg/api/conversations/${convId}/messages`,
+{
+headers:{
+Cookie:`__Host-EldoradoIdToken=${token}`,
+Accept:"application/json"
+}
+}
+);
 {
 headers:{
 Cookie:`__Host-EldoradoIdToken=${token}`,
@@ -209,7 +216,8 @@ console.log("NOTIF CHAT TERKIRIM");
 }catch(err){
 
 console.log("CEK CHAT GAGAL");
-console.log(err.response?.status);
+console.log("STATUS:",err.response?.status);
+console.log("DATA:",err.response?.data);
 
 }
 
