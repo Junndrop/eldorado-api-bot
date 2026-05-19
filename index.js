@@ -170,11 +170,23 @@ global.lastConv
 
 try{
 
-const token=await getToken();
-
-const test=await axios.get(
-`https://www.eldorado.gg/api/conversations/${global.lastConv}`,
+const test = await axios.get(
+`https://www.eldorado.gg/api/conversations/${global.lastConv}/messages`,
 {
+headers:{
+Cookie:`__Host-EldoradoIdToken=${token}`,
+Accept:"application/json"
+}
+}
+);
+
+console.log(
+"PESAN:"
+);
+
+console.log(
+test.data
+);
 headers:{
 Cookie:`__Host-EldoradoIdToken=${token}`,
 Accept:"application/json"
