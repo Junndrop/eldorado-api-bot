@@ -93,6 +93,11 @@ console.log(res.data.results?.[0]?.state);
 
 console.log("STATE LOGS:");
 console.log(res.data.results?.[0]?.stateLogs);
+  console.log("CONVERSATION:");
+console.log(res.data.results?.[0]?.conversationDetails);
+
+console.log("TALKJS:");
+console.log(res.data.results?.[0]?.talkJsConversationId);
 
 const orders = (res.data.results || []).filter(
 x => ![
