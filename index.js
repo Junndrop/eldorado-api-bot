@@ -177,42 +177,7 @@ global.lastConv = convId;
 "LAST CONV:",
 global.lastConv
 );
-}
-);
 
-console.log(
-"PESAN KEYS:"
-);
-
-console.log(
-Object.keys(test.data || {})
-);
-
-console.log(
-"FULL:"
-);
-
-console.log(
-JSON.stringify(
-test.data,
-null,
-2
-)
-);
-
-}catch(err){
-
-console.log("CONV GAGAL:");
-console.log(
-err.response?.status ||
-err.code ||
-err.message
-);
-
-}
-
-  }
-  
   await sendTelegram(
 `<b>🛒 ORDER MASUK</b>
 
