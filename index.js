@@ -154,7 +154,6 @@ Jumlah: ${order.purchaseQuantity}
 Item: ${itemName}
 
 Total:
-Total:
 ${order.totalPrice?.amount}
 ${order.totalPrice?.currency}
 
