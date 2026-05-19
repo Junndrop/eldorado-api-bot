@@ -99,6 +99,11 @@ for(const order of orders){
 
 console.log("ID:",order.id);
 console.log("BUYER:",order.buyerUsername);
+  console.log("CHAT ID:");
+console.log(order.talkJsConversationId);
+
+console.log("HAS CONVERSATION:");
+console.log(!!order.conversationDetails);
 
 if(sentOrders.includes(order.id)){
 continue;
