@@ -93,14 +93,6 @@ console.log(res.data.results?.[0]?.state);
 
 console.log("STATE LOGS:");
 console.log(res.data.results?.[0]?.stateLogs);
-  console.log("CONVERSATION RAW:");
-console.log(
-JSON.stringify(
-res.data.results?.[0]?.conversationDetails,
-null,
-2
-)
-);
 
 console.log("TALKJS:");
 console.log(res.data.results?.[0]?.talkJsConversationId);
@@ -110,32 +102,23 @@ if(convId){
 
 console.log("CONV ID:",convId);
 
-console.log("CONVERSATION DETAILS RAW:");
+  console.log("HAS CONVERSATION:");
 console.log(
-JSON.stringify(
-res.data.results?.[0]?.conversationDetails,
-null,
-2
-)
+!!res.data.results?.[0]?.conversationDetails
 );
 
-console.log("USER REQUEST:");
+console.log("HAS USER REQUEST:");
 console.log(
-JSON.stringify(
-res.data.results?.[0]?.userRequestDetails,
-null,
-2
-)
+!!res.data.results?.[0]?.userRequestDetails
 );
 
-console.log("OFFER:");
+console.log("HAS OFFER:");
 console.log(
-JSON.stringify(
-res.data.results?.[0]?.orderOfferDetails,
-null,
-2
-)
+!!res.data.results?.[0]?.orderOfferDetails
 );
+
+console.log("TALK ID:");
+console.log(convId);
 
 }
 
