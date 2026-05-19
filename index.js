@@ -4,7 +4,6 @@ const { signIn, fetchAuthSession } = require("aws-amplify/auth");
 
 const processedOrders = new Set();
 const lastMessageCache = {};
-const messageCache = {};
 
 const EMAIL = process.env.ELDO_EMAIL;
 const PASSWORD = process.env.ELDO_PASSWORD;
@@ -125,14 +124,14 @@ const itemName =
 order.orderOfferDetails?.offerTitle ||
 "Unknown Item";
 
-global.lastConv =
+const convId =
 order.talkJsConversationId ||
 order.talkjsConversationId ||
 order.conversationDetails?.id ||
 order.talkConversationId ||
 null;
 
-console.log("CONV:",global.lastConv);
+console.log("CONV:",convId);
 
     console.log("KIRIM TELEGRAM...");
     
@@ -167,10 +166,8 @@ ${order.state?.state}
 console.log("ID:",order.id);
 console.log("BUYER:",order.buyerUsername);
 
-    const convId = global.lastConv;
-const convId = global.lastConv;
-
 if(!convId){
+console.log("CHAT ID TIDAK ADA");
 continue;
 }
 
@@ -181,10 +178,7 @@ if(!lastMessageCache[convId]){
 
 lastMessageCache[convId]=stateLog;
 
-continue;
-}
-
-if(lastMessageCache[convId]!==stateLog){
+}else if(lastMessageCache[convId]!==stateLog){
 
 lastMessageCache[convId]=stateLog;
 
@@ -216,75 +210,3 @@ console.log(err.message);
 checkOrders();
 
 setInterval(checkOrders,30000);
-
-setInterval(async()=>{
-
-try{
-
-const res=await axios.get(
-`https://api.telegram.org/bot${TG_TOKEN}/getUpdates?offset=${updateId+1}`
-);
-
-const updates=res.data.result;
-
-for(const u of updates){
-
-updateId = u.update_id;
-
-if(!u.callback_query) continue;
-
-const data = u.callback_query.data;
-const orderId = data.split("_")[1];
-
-console.log("TOMBOL:",data);
-console.log("ORDER ID:",orderId);
-
-if(data.startsWith("done_")){
-
-try{
-
-const token = await getToken();
-
-console.log("PESANAN SELESAI:",orderId);
-
-await axios.post(
-`https://www.eldorado.gg/api/orders/${orderId}/messages/send`,
-{
-message:`Thank you for your order! I would appreciate it if you left a positive review ⭐`
-},
-{
-headers:{
-Cookie:`__Host-EldoradoIdToken=${token}`,
-Accept:"application/json"
-}
-}
-);
-
-console.log("BERHASIL");
-
-}catch(err){
-
-console.log("GAGAL:");
-console.log("DATA:",err.response?.data);
-console.log("STATUS:",err.response?.status);
-console.log("MSG:",err.message);
-
-}
-
-}
-
-}
-
-  }catch(e){
-
-console.log("CRASH:");
-console.log(e);
-
-if(e.response){
-console.log("STATUS:",e.response.status);
-console.log("DATA:",e.response.data);
-}
-
-}
-
-},3000);
