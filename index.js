@@ -124,7 +124,14 @@ const itemName =
 order.orderOfferDetails?.offerTitle ||
 "Unknown Item";
 
-global.lastConv = order.talkJsConversationId;
+global.lastConv =
+order.talkJsConversationId ||
+order.talkjsConversationId ||
+order.conversationDetails?.id ||
+order.talkConversationId ||
+null;
+
+console.log("CONV:",global.lastConv);
 
     console.log("KIRIM TELEGRAM...");
     
@@ -162,10 +169,14 @@ ${order.state?.state}
 console.log("ID:",order.id);
 console.log("BUYER:",order.buyerUsername);
 
-    const convId=global.lastConv;
+    const convId = global.lastConv;
 
-if(!convId) continue;
+console.log("CONV ID:",convId);
 
+if(!convId){
+console.log("CHAT ID TIDAK ADA");
+continue;
+}
     console.log("TEST URL 1:",
 `https://www.eldorado.gg/api/talkjs/conversations/${chatId}`);
 
@@ -330,6 +341,16 @@ console.log("MSG:",err.message);
 
 }
 
-}catch(e){}
+  }catch(e){
+
+console.log("CRASH:");
+console.log(e);
+
+if(e.response){
+console.log("STATUS:",e.response.status);
+console.log("DATA:",e.response.data);
+}
+
+}
 
 },3000);
