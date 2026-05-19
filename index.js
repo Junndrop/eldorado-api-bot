@@ -171,16 +171,20 @@ console.log("CHAT ID TIDAK ADA");
 continue;
 }
 
-const stateLog =
-JSON.stringify(order.stateLogs || []);
+const lastActivity =
+order.updatedAt ||
+order.lastMessageDate ||
+order.lastActivity ||
+order.modifiedDate ||
+"";
 
 if(!lastMessageCache[convId]){
 
-lastMessageCache[convId]=stateLog;
+lastMessageCache[convId]=lastActivity;
 
-}else if(lastMessageCache[convId]!==stateLog){
+}else if(lastMessageCache[convId]!==lastActivity){
 
-lastMessageCache[convId]=stateLog;
+lastMessageCache[convId]=lastActivity;
 
 await sendTelegram(
 `📩 CHAT MASUK
@@ -194,8 +198,7 @@ ${order.id}`
 
 console.log("NOTIF CHAT TERKIRIM");
 }
-}
-
+  }
 }catch(err){
 
 console.log("FULL ERROR:");
@@ -203,6 +206,7 @@ console.log(err.response?.data || err);
 
 console.log("MESSAGE:");
 console.log(err.message);
+  console.log("LAST:",lastActivity);
 
 }
 }
