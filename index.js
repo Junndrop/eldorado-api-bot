@@ -162,6 +162,57 @@ ${order.state?.state}
 console.log("ID:",order.id);
 console.log("BUYER:",order.buyerUsername);
 
+    const convId=global.lastConv;
+
+if(!convId) continue;
+
+try{
+
+const token=await getToken();
+
+const msgRes=await axios.get(
+`https://www.eldorado.gg/api/talkjs/conversations/${convId}/messages`,
+{
+headers:{
+Cookie:`__Host-EldoradoIdToken=${token}`,
+Accept:"application/json"
+}
+}
+);
+
+const msgs=msgRes.data.results||[];
+
+if(msgs.length){
+
+const lastMsg=msgs[msgs.length-1];
+
+if(
+messageCache[convId]!==lastMsg.id
+){
+
+messageCache[convId]=lastMsg.id;
+
+await sendTelegram(
+`💬 CHAT BARU
+
+👤 ${order.buyerUsername}
+
+${lastMsg.text || "(kosong)"}`
+);
+
+console.log("NOTIF CHAT TERKIRIM");
+
+}
+
+}
+
+}catch(err){
+
+console.log("CEK CHAT GAGAL");
+console.log(err.response?.status);
+
+}
+
   }
 
 }catch(err){
