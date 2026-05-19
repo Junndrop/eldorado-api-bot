@@ -146,8 +146,13 @@ order.conversationDetails
 
 const convId =
 order.conversationDetails?.id ||
-order.conversationDetails?.conversationId;
+order.conversationDetails?.conversationId ||
+order.talkJsConversationId;
 
+console.log(
+"TALKJS:",
+order.talkJsConversationId
+);
 console.log("CHAT:",convId);
 
   if(convId){
