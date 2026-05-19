@@ -147,6 +147,17 @@ x => ![
 ].includes(x.state?.state)
 );
 
+  console.log("DETAILS:");
+console.log(order.conversationDetails);
+
+console.log("TYPE:");
+console.log(typeof order.conversationDetails);
+
+console.log("FULL ORDER:");
+console.log(
+JSON.stringify(order,null,2)
+);
+
 console.log("TOTAL:", orders.length);
   
 for(const order of orders){
