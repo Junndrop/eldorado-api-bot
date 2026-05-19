@@ -132,6 +132,10 @@ order.talkConversationId ||
 null;
 
 console.log("CONV:",convId);
+    console.log("updatedAt:",order.updatedAt);
+console.log("lastMessageDate:",order.lastMessageDate);
+console.log("lastActivity:",order.lastActivity);
+console.log("modifiedDate:",order.modifiedDate);
 
     console.log("KIRIM TELEGRAM...");
 
