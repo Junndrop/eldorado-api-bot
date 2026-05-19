@@ -3,6 +3,7 @@ const { Amplify } = require("aws-amplify");
 const { signIn, fetchAuthSession } = require("aws-amplify/auth");
 
 const processedOrders = new Set();
+const seenConversations = new Set();
 const messageCache = {};
 
 const EMAIL = process.env.ELDO_EMAIL;
@@ -156,9 +157,6 @@ ${order.state?.state}
 🆔 <code>${order.id}</code>`,
 [
 [
-{text:"✉️ Kirim Pesan Awal",callback_data:`start_${order.id}`}
-],
-[
 {text:"✅ Pesanan Selesai",callback_data:`done_${order.id}`}
 ]
 ]
@@ -176,6 +174,23 @@ console.log("CONV ID:",convId);
 if(!convId){
 console.log("CHAT ID TIDAK ADA");
 continue;
+}
+
+if(!seenConversations.has(convId)){
+
+seenConversations.add(convId);
+
+await sendTelegram(
+`📩 CHAT MASUK
+
+👤 Buyer:
+${order.buyerUsername}
+
+🆔
+${order.id}`
+);
+
+console.log("NOTIF CHAT TERKIRIM");
 }
 }
 
@@ -215,42 +230,6 @@ const orderId = data.split("_")[1];
 
 console.log("TOMBOL:",data);
 console.log("ORDER ID:",orderId);
-
-if(data.startsWith("start_")){
-
-try{
-
-const token = await getToken();
-
-console.log("KIRIM PESAN AWAL:",orderId);
-console.log("CONV:",global.lastConv);
-
-const r=await axios.post(
-`https://www.eldorado.gg/api/conversations/${global.lastConv}/messages`,
-{
-message:"Hello! Send your Roblox username and please read description 🙂"
-},
-{
-headers:{
-Cookie:`__Host-EldoradoIdToken=${token}`,
-Accept:"application/json",
-"Content-Type":"application/json"
-}
-}
-);
-
-console.log("PESAN AWAL BERHASIL");
-console.log(r.data);
-
-}catch(err){
-
-console.log("GAGAL KIRIM CHAT");
-console.log("STATUS:",err.response?.status);
-console.log("DATA:",JSON.stringify(err.response?.data));
-
-}
-
-}
 
 if(data.startsWith("done_")){
 
