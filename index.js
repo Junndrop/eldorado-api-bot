@@ -218,14 +218,17 @@ console.log("ORDER ID:",orderId);
 
 if(data.startsWith("start_")){
 
+try{
+
 const token = await getToken();
 
 console.log("KIRIM PESAN AWAL:",orderId);
+console.log("CONV:",global.lastConv);
 
-await axios.post(
+const r=await axios.post(
 `https://www.eldorado.gg/api/conversations/${global.lastConv}/messages`,
 {
-message:`Hello! Send your Roblox username and please read description 🙂`
+message:"Hello! Send your Roblox username and please read description 🙂"
 },
 {
 headers:{
@@ -236,7 +239,16 @@ Accept:"application/json",
 }
 );
 
-  console.log("PESAN AWAL BERHASIL");
+console.log("PESAN AWAL BERHASIL");
+console.log(r.data);
+
+}catch(err){
+
+console.log("GAGAL KIRIM CHAT");
+console.log("STATUS:",err.response?.status);
+console.log("DATA:",JSON.stringify(err.response?.data));
+
+}
 
 }
 
