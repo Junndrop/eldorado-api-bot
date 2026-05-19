@@ -133,61 +133,6 @@ res.data.results?.[0]?.conversationId ||
 res.data.results?.[0]?.id;
 
 console.log("CHAT:",convId);
-
-  console.log(
-"ALL KEYS:",
-Object.keys(
-res.data.results?.[0] || {}
-)
-);
-
-  console.log(
-"STATE:",
-res.data.results?.[0]?.state
-);
-
-console.log(
-"STATE LOG:",
-JSON.stringify(
-res.data.results?.[0]?.stateLogs,
-null,
-2
-)
-);
-
-  if(convId){
-
-try{
-
-const token = await getToken();
-
-const msgRes = await axios.get(
-`https://www.eldorado.gg/api/conversations/${convId}/messages`,
-{
-headers:{
-Cookie:`__Host-EldoradoIdToken=${token}`,
-Accept:"application/json"
-}
-}
-);
-
-const totalMsg = msgRes.data?.results?.length || 0;
-
-console.log("PESAN:",totalMsg);
-
-}catch(err){
-
-console.log("CHAT CEK GAGAL");
-
-console.log(
-err.response?.status ||
-err.code ||
-err.message
-);
-
-}
-
-  }
   
   await sendTelegram(
 `<b>🛒 ORDER MASUK</b>
