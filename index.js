@@ -170,32 +170,24 @@ try{
 
 const token=await getToken();
 
-const msgRes=await axios.get(
+const msgRes = await axios.get(
 `https://www.eldorado.gg/api/conversations/${convId}/messages`,
 {
 headers:{
 Cookie:`__Host-EldoradoIdToken=${token}`,
 Accept:"application/json"
-}
-}
-);
-{
-headers:{
-Cookie:`__Host-EldoradoIdToken=${token}`,
-Accept:"application/json"
-}
+},
+timeout:10000
 }
 );
 
-const msgs=msgRes.data.results||[];
+const msgs = msgRes.data.results || [];
 
 if(msgs.length){
 
-const lastMsg=msgs[msgs.length-1];
+const lastMsg = msgs[msgs.length-1];
 
-if(
-messageCache[convId]!==lastMsg.id
-){
+if(messageCache[convId] !== lastMsg.id){
 
 messageCache[convId]=lastMsg.id;
 
