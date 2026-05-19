@@ -135,15 +135,14 @@ console.log("CONV:",convId);
 
     console.log("KIRIM TELEGRAM...");
 
-    const waktu = new Date().toLocaleString("id-ID",{
+    const waktu = new Date(
+order.createdDate || order.createdAt
+).toLocaleString("id-ID",{
 timeZone:"Asia/Jakarta"
 });
     
 await sendTelegram(
 `<b>🛒 ORDER MASUK</b>
-
-🕒 <b>Waktu</b>
-${waktu}
 
 👤 <b>Buyer</b>
 ${order.buyerUsername}
@@ -157,8 +156,8 @@ ${itemName}
 💵 <b>Total</b>
 ${order.totalPrice?.amount} ${order.totalPrice?.currency}
 
-🟢 <b>Status</b>
-${order.state?.state}
+🕒 <b>Waktu</b>
+${waktu}
 
 🆔 <code>${order.id}</code>`,
 [
@@ -200,11 +199,11 @@ timeZone:"Asia/Jakarta"
 await sendTelegram(
 `📩 CHAT MASUK
 
-🕒 Waktu:
-${waktu}
-
 👤 Buyer:
 ${order.buyerUsername}
+
+🕒 Waktu:
+${waktu}
 
 🆔
 ${order.id}`
