@@ -85,10 +85,14 @@ headers:{
 }
 );
   
-  console.log(JSON.stringify(res.data,null,2));
-
-console.log("ORDER KEYS:");
+  console.log("ORDER KEYS:");
 console.log(Object.keys(res.data.results?.[0] || {}));
+
+console.log("STATE:");
+console.log(res.data.results?.[0]?.state);
+
+console.log("STATE LOGS:");
+console.log(res.data.results?.[0]?.stateLogs);
 
 const orders = (res.data.results || []).filter(
 x => ![
