@@ -86,43 +86,7 @@ headers:{
 );
   
   console.log("ORDER KEYS:");
-console.log(Object.keys(res.data.results?.[0] || {}));
-
-console.log("STATE:");
-console.log(res.data.results?.[0]?.state);
-
-console.log("STATE LOGS:");
-console.log(res.data.results?.[0]?.stateLogs);
-
-console.log("TALKJS:");
-console.log(res.data.results?.[0]?.talkJsConversationId);
-  const convId = res.data.results?.[0]?.talkJsConversationId;
-
-if(convId){
-
-console.log("CONV ID:",convId);
-
-  console.log("HAS CONVERSATION:");
-console.log(
-!!res.data.results?.[0]?.conversationDetails
-);
-
-console.log("HAS USER REQUEST:");
-console.log(
-!!res.data.results?.[0]?.userRequestDetails
-);
-
-console.log("HAS OFFER:");
-console.log(
-!!res.data.results?.[0]?.orderOfferDetails
-);
-
-console.log("TALK ID:");
-console.log(convId);
-
-}
-
-const orders = (res.data.results || []).filter(
+co
 x => ![
 "Canceled",
 "Completed",
