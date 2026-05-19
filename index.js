@@ -156,6 +156,12 @@ console.log("PESAN:",totalMsg);
 
 console.log("CHAT CEK GAGAL");
 
+console.log(
+err.response?.status ||
+err.code ||
+err.message
+);
+
 }
 
   }
