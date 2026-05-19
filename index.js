@@ -147,10 +147,41 @@ global.lastConv
 
   if(global.lastConv){
 
-console.log(
-"CEK CONV:",
-`https://www.eldorado.gg/api/conversations/${global.lastConv}`
+try{
+
+const token=await getToken();
+
+const test=await axios.get(
+`https://www.eldorado.gg/api/conversations/${global.lastConv}`,
+{
+headers:{
+Cookie:`__Host-EldoradoIdToken=${token}`,
+Accept:"application/json"
+}
+}
 );
+
+console.log(
+"CONV OK:"
+);
+
+console.log(
+Object.keys(test.data || {})
+);
+
+}catch(err){
+
+console.log(
+"CONV GAGAL:"
+);
+
+console.log(
+err.response?.status ||
+err.code ||
+err.message
+);
+
+}
 
   }
   
