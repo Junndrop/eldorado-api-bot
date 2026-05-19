@@ -46,7 +46,8 @@ timeout:10000
 }catch(err){
 
 console.log("TELEGRAM GAGAL:");
-console.log(err.code || err.message);
+console.log(err.response?.data);
+console.log(err.message);
 
 }
 
