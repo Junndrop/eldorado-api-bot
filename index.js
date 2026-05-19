@@ -115,8 +115,11 @@ null,
 2
 )
 );
-console.log("CHAT ID:");
-  console.log(
+const convId = res.data.results?.[0]?.talkJsConversationId;
+
+console.log("CHAT ID:", convId);
+
+console.log(
 "https://www.eldorado.gg/api/conversations/" +
 convId
 );
