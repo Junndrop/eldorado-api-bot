@@ -170,6 +170,8 @@ global.lastConv
 
 try{
 
+const token=await getToken();
+
 const test = await axios.get(
 `https://www.eldorado.gg/api/conversations/${global.lastConv}/messages`,
 {
@@ -180,34 +182,12 @@ Accept:"application/json"
 }
 );
 
-console.log(
-"PESAN:"
-);
-
-console.log(
-test.data
-);
-headers:{
-Cookie:`__Host-EldoradoIdToken=${token}`,
-Accept:"application/json"
-}
-}
-);
-
-console.log(
-"CONV OK:"
-);
-
-console.log(
-Object.keys(test.data || {})
-);
+console.log("PESAN:");
+console.log(test.data);
 
 }catch(err){
 
-console.log(
-"CONV GAGAL:"
-);
-
+console.log("CONV GAGAL:");
 console.log(
 err.response?.status ||
 err.code ||
