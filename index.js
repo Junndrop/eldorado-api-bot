@@ -147,7 +147,29 @@ x => ![
 ].includes(x.state?.state)
 );
 
-  console.log("DETAILS:");
+console.log("TOTAL:", orders.length);
+
+for(const order of orders){
+
+console.log("STATE:");
+console.log(order.state);
+
+console.log("STATE LOGS:");
+console.log(order.stateLogs);
+
+console.log("TALKJS:");
+console.log(order.talkJsConversationId);
+
+console.log("CONVERSATION DETAILS RAW:");
+console.log(
+JSON.stringify(
+order.conversationDetails,
+null,
+2
+)
+);
+
+console.log("DETAILS:");
 console.log(order.conversationDetails);
 
 console.log("TYPE:");
@@ -155,14 +177,22 @@ console.log(typeof order.conversationDetails);
 
 console.log("FULL ORDER:");
 console.log(
-JSON.stringify(order,null,2)
+JSON.stringify(
+order,
+null,
+2
+)
 );
 
-console.log("TOTAL:", orders.length);
-  
-for(const order of orders){
-  if(sentOrders.includes(order.id)) continue;
-  sentOrders.push(order.id);
+console.log("OFFER:");
+console.log(
+JSON.stringify(
+order.orderOfferDetails,
+null,
+2
+));
+
+}
 
 await sendTelegram(
 `🛒 ORDER MASUK
