@@ -144,6 +144,15 @@ global.lastConv = convId;
 "LAST CONV:",
 global.lastConv
 );
+
+  if(global.lastConv){
+
+console.log(
+"CEK CONV:",
+`https://www.eldorado.gg/api/conversations/${global.lastConv}`
+);
+
+  }
   
   await sendTelegram(
 `<b>🛒 ORDER MASUK</b>
