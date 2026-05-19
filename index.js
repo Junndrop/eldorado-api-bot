@@ -136,9 +136,17 @@ order.orderOfferDetails?.gameCategoryTitle ||
 console.log("ID:",order.id);
 console.log("BUYER:",order.buyerUsername);
 
-  const convId =
-res.data.results?.[0]?.conversationId ||
-res.data.results?.[0]?.id;
+  console.log(
+"CONV DETAILS:"
+);
+
+console.log(
+order.conversationDetails
+);
+
+const convId =
+order.conversationDetails?.id ||
+order.conversationDetails?.conversationId;
 
 console.log("CHAT:",convId);
 
