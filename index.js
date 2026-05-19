@@ -133,6 +133,12 @@ res.data.results?.[0]?.conversationId ||
 res.data.results?.[0]?.id;
 
 console.log("CHAT:",convId);
+
+  if(convId){
+
+global.lastConv = convId;
+
+  }
   
   await sendTelegram(
 `<b>🛒 ORDER MASUK</b>
