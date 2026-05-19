@@ -177,20 +177,6 @@ global.lastConv = convId;
 "LAST CONV:",
 global.lastConv
 );
-
-  if(global.lastConv){
-
-try{
-
-const token=await getToken();
-
-const test = await axios.get(
-`https://www.eldorado.gg/api/conversations/${global.lastConv}/messages`,
-{
-headers:{
-Cookie:`__Host-EldoradoIdToken=${token}`,
-Accept:"application/json"
-}
 }
 );
 
