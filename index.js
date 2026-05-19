@@ -127,6 +127,10 @@ order.orderOfferDetails?.gameCategoryTitle ||
 
 console.log("ID:",order.id);
 console.log("BUYER:",order.buyerUsername);
+
+  const convId = order.talkJsConversationId;
+
+console.log("CHAT:",convId);
   
   await sendTelegram(
 `<b>🛒 ORDER MASUK</b>
