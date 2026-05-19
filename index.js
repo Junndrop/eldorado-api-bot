@@ -128,9 +128,18 @@ order.orderOfferDetails?.gameCategoryTitle ||
 console.log("ID:",order.id);
 console.log("BUYER:",order.buyerUsername);
 
-  const convId = order.talkJsConversationId;
+  const convId =
+res.data.results?.[0]?.conversationId ||
+res.data.results?.[0]?.id;
 
 console.log("CHAT:",convId);
+
+  console.log(
+"ALL KEYS:",
+Object.keys(
+res.data.results?.[0] || {}
+)
+);
 
   console.log(
 "STATE:",
