@@ -23,7 +23,6 @@ Amplify.configure({
 });
 
 async function sendTelegram(text,buttons=null){
-async function sendTelegram(text,buttons=null){
 
 await axios.post(
 `https://api.telegram.org/bot${TG_TOKEN}/sendMessage`,
