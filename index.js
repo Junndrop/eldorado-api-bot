@@ -125,6 +125,8 @@ order.orderOfferDetails?.offerTitle ||
 
 global.lastConv = order.talkJsConversationId;
 
+    console.log("KIRIM TELEGRAM...");
+    
 await sendTelegram(
 `<b>🛒 ORDER MASUK</b>
 
@@ -154,6 +156,8 @@ ${order.state?.state}
 ]
 );
 
+    console.log("TELEGRAM TERKIRIM");
+    
 console.log("ID:",order.id);
 console.log("BUYER:",order.buyerUsername);
 
