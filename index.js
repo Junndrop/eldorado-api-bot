@@ -145,11 +145,14 @@ continue;
 sentOrders.push(order.id);
 
 await sendTelegram(
+await sendTelegram(
 `🛒 ORDER MASUK
 
 Buyer: ${order.buyerUsername}
 
 Jumlah: ${order.purchaseQuantity}
+
+Item: ${itemName}
 
 Total:
 ${order.totalPrice?.amount}
