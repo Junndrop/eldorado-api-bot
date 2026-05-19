@@ -179,18 +179,6 @@ continue;
 }
 }
 
-}
-
-}catch(err){
-
-console.log("CEK CHAT GAGAL");
-console.log("STATUS:",err.response?.status);
-console.log("DATA:",err.response?.data);
-
-}
-
-  }
-
 }catch(err){
 
 console.log("FULL ERROR:");
