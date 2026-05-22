@@ -168,7 +168,6 @@ console.log("TELEGRAM TERKIRIM");
 console.log("ID:",order.id);
 console.log("BUYER:",order.buyerUsername);
     
-  }
 }catch(err){
 
 console.log("FULL ERROR:");
