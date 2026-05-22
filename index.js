@@ -167,62 +167,7 @@ console.log("TELEGRAM TERKIRIM");
 
 console.log("ID:",order.id);
 console.log("BUYER:",order.buyerUsername);
-
-if(!convId){
-console.log("CHAT ID TIDAK ADA");
-continue;
-}
-
-try{
-
-const chatRes = await axios.get(
-`https://www.eldorado.gg/api/talkjs/conversations/${convId}`,
-{
-headers:{
-"User-Agent":BOT_KEY,
-"Cookie":`__Host-EldoradoIdToken=${token}`,
-"Accept":"application/json"
-}
-}
-);
-
-const lastText =
-chatRes.data?.lastMessage?.body || "";
-console.log("PESAN:",lastText);
-
-if(!lastMessageCache[convId]){
-
-lastMessageCache[convId]=lastText;
-
-}else if(lastMessageCache[convId]!==lastText){
-
-lastMessageCache[convId]=lastText;
-
-const waktu = new Date().toLocaleString("id-ID",{
-timeZone:"Asia/Jakarta"
-});
-
-await sendTelegram(
-`📩 CHAT MASUK
-
-👤 Buyer:
-${order.buyerUsername}
-
-🎁 Item:
-${itemName}
-
-🕒 Waktu:
-${waktu}`
-);
-
-console.log("NOTIF CHAT TERKIRIM");
-}
-
-}catch(e){
-
-console.log("CEK CHAT GAGAL");
-console.log(e.response?.status);
-}
+    
   }
 }catch(err){
 
@@ -237,3 +182,34 @@ console.log(err.message);
 checkOrders();
 
 setInterval(checkOrders,30000);
+
+const WebSocket = require("ws");
+
+const ws = new WebSocket(
+"wss://app.talkjs.com/api/v0/49mLECOW/socket/websocket?talkjs-client-build=release-01699e0&appId=49mLECOW&authToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlblR5cGUiOiJ1c2VyIiwic3ViIjoiMWUyY2Q4OTktZjMzNC00ZTc2LWE3MjYtYzJhMTVjOThkZjAxIiwiZXhwIjoxNzc5NDg0MDIwLCJpc3MiOiI0OW1MRUNPVyJ9.b5YyVnwPSmuwkaF3qoSWSHRiRIGZy1YFaXa9s0RNgOY&vsn=2.0.0"
+);
+
+ws.on("open", () => {
+console.log("WS CONNECTED");
+});
+
+ws.on("message", async (data) => {
+
+const text = data.toString();
+
+console.log(text);
+
+if(
+text.includes("UserMessage") &&
+!text.includes('"origin":"web"')
+){
+
+console.log("CHAT BUYER MASUK");
+
+await sendTelegram(
+`📩 CHAT BUYER BARU`
+);
+
+}
+
+});
