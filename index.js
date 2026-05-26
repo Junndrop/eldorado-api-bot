@@ -177,12 +177,6 @@ ${order.totalPrice?.amount} ${order.totalPrice?.currency}
 ${waktu}`,
 [
 [
-{text:"✅ Pesanan Selesai",callback_data:`done_${order.id}`}
-]
-]
-);
-  [
-[
 {text:"📊 Statistik",callback_data:"stats"}
 ],
 [
@@ -255,6 +249,7 @@ sendStats();
 }
 
 },60000);
+  setInterval(checkTelegramButtons,3000);
 
   async function checkTelegramButtons(){
 
@@ -301,5 +296,38 @@ console.log(err.message);
 }
 
   }
+  
+async function checkTelegramButtons(){
 
+try{
+
+const res = await axios.get(
+`https://api.telegram.org/bot${TG_TOKEN}/getUpdates?offset=${updateId+1}`
+);
+
+const updates = res.data.result || [];
+
+for(const u of updates){
+
+updateId = u.update_id;
+
+const data = u.callback_query?.data;
+
+if(data==="stats"){
+
+await sendStats();
+
+}
+
+}
+
+}catch(err){
+
+console.log("BUTTON ERROR");
+console.log(err.message);
+
+}
+
+}
+  
   setInterval(checkTelegramButtons,3000);
