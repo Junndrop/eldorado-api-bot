@@ -146,7 +146,17 @@ null;
 if(!processedOrders.has(order.id)){
 
 processedOrders.add(order.id);
-  const jam = new Date().getHours();
+
+  const jam = Number(
+new Date().toLocaleString(
+"id-ID",
+{
+timeZone:"Asia/Jakarta",
+hour:"2-digit",
+hour12:false
+}
+).split(".")[0]
+);
 
 orderStats[jam] =
 (orderStats[jam] || 0) + 1;
