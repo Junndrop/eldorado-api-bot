@@ -158,7 +158,7 @@ timeZone:"Asia/Jakarta"
 });
 
 await sendTelegram(
-  
+
 `<b>🛒 ORDER MASUK</b>
 
 👤 <b>Buyer</b>
@@ -183,6 +183,7 @@ ${waktu}`,
 {text:"✅ Pesanan Selesai",callback_data:`done_${order.id}`}
 ]
 ]
+);
 
 console.log("TELEGRAM TERKIRIM");
 }
