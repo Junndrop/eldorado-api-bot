@@ -52,6 +52,8 @@ console.log(err.message);
 
 }
 
+}
+
 async function sendStats(){
 
 let text = "📊 STATISTIK ORDER HARI INI\n\n";
