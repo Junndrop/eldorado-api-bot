@@ -2,6 +2,7 @@ const axios = require("axios");
 const { Amplify } = require("aws-amplify");
 const { signIn, fetchAuthSession } = require("aws-amplify/auth");
 
+const orderStats = {};
 const processedOrders = new Set();
 const lastMessageCache = {};
 
@@ -129,6 +130,10 @@ null;
 if(!processedOrders.has(order.id)){
 
 processedOrders.add(order.id);
+  const jam = new Date().getHours();
+
+orderStats[jam] =
+(orderStats[jam] || 0) + 1;
 
 console.log("KIRIM TELEGRAM...");
 
@@ -139,6 +144,23 @@ timeZone:"Asia/Jakarta"
 });
 
 await sendTelegram(
+
+  async function sendStats(){
+
+let text = "📊 STATISTIK ORDER HARI INI\n\n";
+
+for(let i=0;i<24;i++){
+
+const jam = i.toString().padStart(2,"0");
+
+text += `${jam}:00 = ${orderStats[i] || 0} order\n`;
+
+}
+
+await sendTelegram(text);
+
+  }
+  
 `<b>🛒 ORDER MASUK</b>
 
 👤 <b>Buyer</b>
@@ -212,3 +234,18 @@ await sendTelegram(
 }
 
 });
+
+setInterval(()=>{
+
+const now = new Date();
+
+if(
+now.getHours()===0 &&
+now.getMinutes()===0
+){
+
+sendStats();
+
+}
+
+},60000);
