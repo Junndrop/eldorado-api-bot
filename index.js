@@ -304,3 +304,5 @@ console.log(err.message);
 }
 
   }
+
+sendStats();
