@@ -54,6 +54,18 @@ console.log(err.message);
 
 }
 
+async function sendStats(){
+
+let text = "📊 STATISTIK ORDER HARI INI\n\n";
+
+for(let i=0;i<24;i++){
+
+const jam = i.toString().padStart(2,"0");
+
+text += `${jam}:00 = ${orderStats[i] || 0} order\n`;
+
+}
+  
 async function getToken(){
 
 try{
@@ -144,18 +156,6 @@ timeZone:"Asia/Jakarta"
 });
 
 await sendTelegram(
-
-  async function sendStats(){
-
-let text = "📊 STATISTIK ORDER HARI INI\n\n";
-
-for(let i=0;i<24;i++){
-
-const jam = i.toString().padStart(2,"0");
-
-text += `${jam}:00 = ${orderStats[i] || 0} order\n`;
-
-}
 
 await sendTelegram(text);
 
