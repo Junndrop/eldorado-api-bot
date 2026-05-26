@@ -217,6 +217,11 @@ ws.on("open", () => {
 console.log("WS CONNECTED");
 });
 
+ws.on("error", (err) => {
+console.log("WS ERROR");
+console.log(err.message);
+});
+
 ws.on("message", async (data) => {
 
 const text = data.toString();
