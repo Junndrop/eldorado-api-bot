@@ -181,6 +181,14 @@ ${waktu}`,
 ]
 ]
 );
+  [
+[
+{text:"📊 Statistik",callback_data:"stats"}
+],
+[
+{text:"✅ Pesanan Selesai",callback_data:`done_${order.id}`}
+]
+]
 
 console.log("TELEGRAM TERKIRIM");
 }
@@ -247,3 +255,51 @@ sendStats();
 }
 
 },60000);
+
+  async function checkTelegramButtons(){
+
+try{
+
+const res = await axios.get(
+`https://api.telegram.org/bot${TG_TOKEN}/getUpdates?offset=${updateId+1}`
+);
+
+const updates = res.data.result || [];
+
+for(const u of updates){
+
+updateId = u.update_id;
+
+const data =
+u.callback_query?.data;
+
+if(data==="stats"){
+
+let text = "📊 STATISTIK ORDER HARI INI\n\n";
+
+for(let i=0;i<24;i++){
+
+const jam =
+i.toString().padStart(2,"0");
+
+text +=
+`${jam}:00 = ${orderStats[i] || 0} order\n`;
+
+}
+
+await sendTelegram(text);
+
+}
+
+}
+
+}catch(err){
+
+console.log("BUTTON ERROR");
+console.log(err.message);
+
+}
+
+  }
+
+  setInterval(checkTelegramButtons,3000);
