@@ -299,5 +299,3 @@ console.log(err.message);
 }
 
   }
-  
-  setInterval(checkTelegramButtons,3000);
