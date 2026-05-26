@@ -65,6 +65,10 @@ const jam = i.toString().padStart(2,"0");
 text += `${jam}:00 = ${orderStats[i] || 0} order\n`;
 
 }
+
+await sendTelegram(text);
+
+}
   
 async function getToken(){
 
@@ -156,10 +160,6 @@ timeZone:"Asia/Jakarta"
 });
 
 await sendTelegram(
-
-await sendTelegram(text);
-
-  }
   
 `<b>🛒 ORDER MASUK</b>
 
