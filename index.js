@@ -297,7 +297,7 @@ text +=
 
 }
 
-text += `\n💰 TOTAL HARI INI
+text += `\n💰 TOTAL
 ${totalOrder} order | $${totalDollar.toFixed(2)}`;
 
 await sendTelegram(text);
