@@ -279,23 +279,27 @@ u.callback_query?.data;
 
 if(data==="stats"){
 
+if(data==="stats"){
+
 let text = "📊 STATISTIK ORDER\n\n";
 
-  let totalOrder = 0;
+let totalOrder = 0;
 let totalDollar = 0;
 
 for(let i=0;i<24;i++){
 
-const jam = i.toString().padStart(2,"0");
+const jam =
+i.toString().padStart(2,"0");
 
-  totalOrder += (orderStats[i] || 0);
+totalOrder += (orderStats[i] || 0);
 totalDollar += (orderMoneyStats[i] || 0);
 
-text += `${jam}:00 = ${orderStats[i] || 0} order | $${(orderMoneyStats[i] || 0).toFixed(2)}\n`;
+text +=
+`${jam}:00 = ${orderStats[i] || 0} order | $${(orderMoneyStats[i] || 0).toFixed(2)}\n`;
 
 }
 
-  text += `\n💰 TOTAL HARI INI
+text += `\n💰 TOTAL HARI INI
 ${totalOrder} order | $${totalDollar.toFixed(2)}`;
 
 await sendTelegram(text);
@@ -312,5 +316,3 @@ console.log(err.message);
 }
 
   }
-
-sendStats();
