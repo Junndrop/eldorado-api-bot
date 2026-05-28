@@ -8,7 +8,7 @@ const dailyOrderStats = {};
 const dailyMoneyStats = {};
 const orderMoneyStats = {};
 const processedOrders = new Set();
-const lastMessageCache = {};
+const orderStates = {};
 
 const EMAIL = process.env.ELDO_EMAIL;
 const PASSWORD = process.env.ELDO_PASSWORD;
@@ -96,7 +96,7 @@ const token = await getToken();
 console.log("TOKEN ADA");
 
 const res = await axios.get(
-"https://www.eldorado.gg/api/orders/me/seller/orders",
+"https://www.eldorado.gg/api/v1/orders/me/seller/orders",
 {
 headers:{
 "User-Agent":BOT_KEY,
@@ -128,14 +128,6 @@ order.state?.state;
 const itemName =
 order.orderOfferDetails?.offerTitle ||
 "Unknown Item";
-
-const convId =
-order.talkJsConversationId ||
-order.talkjsConversationId ||
-order.conversationDetails?.id ||
-order.talkConversationId ||
-null;
-
 
 if(!processedOrders.has(order.id)){
 
@@ -246,42 +238,6 @@ console.log(err.message);
 checkOrders();
 
 setInterval(checkOrders,30000);
-
-const WebSocket = require("ws");
-
-const ws = new WebSocket(
-"wss://app.talkjs.com/api/v0/49mLECOW/socket/websocket?talkjs-client-build=release-01699e0&appId=49mLECOW&authToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlblR5cGUiOiJ1c2VyIiwic3ViIjoiMWUyY2Q4OTktZjMzNC00ZTc2LWE3MjYtYzJhMTVjOThkZjAxIiwiZXhwIjoxNzc5NDg0MDIwLCJpc3MiOiI0OW1MRUNPVyJ9.b5YyVnwPSmuwkaF3qoSWSHRiRIGZy1YFaXa9s0RNgOY&vsn=2.0.0"
-);
-
-ws.on("open", () => {
-console.log("WS CONNECTED");
-});
-
-ws.on("error", (err) => {
-console.log("WS ERROR");
-console.log(err.message);
-});
-
-ws.on("message", async (data) => {
-
-const text = data.toString();
-
-console.log(text);
-
-if(
-text.includes("UserMessage") &&
-!text.includes('"origin":"web"')
-){
-
-console.log("CHAT BUYER MASUK");
-
-await sendTelegram(
-`📩 CHAT BUYER BARU`
-);
-
-}
-
-});
 
 setInterval(async ()=>{
 
