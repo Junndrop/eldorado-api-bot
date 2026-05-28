@@ -322,9 +322,40 @@ updateId = u.update_id;
 const data =
 u.callback_query?.data;
 
-if(data==="stats"){
+  if(data==="stats"){
 
-  if(data==="wallet"){
+let text = "📊 STATISTIK ORDER\n\n";
+
+let totalOrder = 0;
+let totalDollar = 0;
+
+for(let i=0;i<24;i++){
+
+const jam =
+i.toString().padStart(2,"0");
+
+totalOrder += (orderStats[i] || 0);
+totalDollar += (orderMoneyStats[i] || 0);
+
+text +=
+`${jam}:00 = ${orderStats[i] || 0} order | $${(orderMoneyStats[i] || 0).toFixed(2)}\n`;
+
+}
+
+const wallet =
+totalDollar * 0.85;
+
+text += `\n💰 TOTAL
+${totalOrder} order | $${totalDollar.toFixed(2)}
+
+🏦 WALLET
+$${wallet.toFixed(2)}`;
+
+await sendTelegram(text);
+
+}
+
+if(data==="wallet"){
 
 let totalDollar = 0;
 
@@ -347,31 +378,6 @@ $${totalDollar.toFixed(2)}
 💰 Net:
 $${wallet.toFixed(2)}`
 );
-
-  }
-
-let text = "📊 STATISTIK ORDER\n\n";
-
-let totalOrder = 0;
-let totalDollar = 0;
-
-for(let i=0;i<24;i++){
-
-const jam =
-i.toString().padStart(2,"0");
-
-totalOrder += (orderStats[i] || 0);
-totalDollar += (orderMoneyStats[i] || 0);
-
-text +=
-`${jam}:00 = ${orderStats[i] || 0} order | $${(orderMoneyStats[i] || 0).toFixed(2)}\n`;
-
-}
-
-text += `\n💰 TOTAL
-${totalOrder} order | $${totalDollar.toFixed(2)}`;
-
-await sendTelegram(text);
 
 }
 
