@@ -3,6 +3,7 @@ const { Amplify } = require("aws-amplify");
 const { signIn, fetchAuthSession } = require("aws-amplify/auth");
 
 const orderStats = {};
+const orderMoneyStats = {};
 const processedOrders = new Set();
 const lastMessageCache = {};
 
@@ -56,14 +57,13 @@ console.log(err.message);
 
 async function sendStats(){
 
-let text = "📊 STATISTIK ORDER HARI INI\n\n";
+let text = "📊 STATISTIK ORDER\n\n";
 
 for(let i=0;i<24;i++){
 
 const jam = i.toString().padStart(2,"0");
 
-text += `${jam}:00 = ${orderStats[i] || 0} order\n`;
-
+text += `${jam}:00 = ${orderStats[i] || 0} order | $${(orderMoneyStats[i] || 0).toFixed(2)}\n`;
 }
 
 await sendTelegram(text);
@@ -160,6 +160,12 @@ hour12:false
 
 orderStats[jam] =
 (orderStats[jam] || 0) + 1;
+  
+  const amount =
+Number(order.totalPrice?.amount || 0);
+
+orderMoneyStats[jam] =
+(orderMoneyStats[jam] || 0) + amount;
 
 console.log("KIRIM TELEGRAM...");
 
