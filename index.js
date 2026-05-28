@@ -189,14 +189,6 @@ console.log("ORDER DIBATALKAN");
 
 if(!processedOrders.has(order.id)){
 
-  if(processedOrders.size > 5000){
-
-processedOrders.clear();
-
-console.log("CACHE RESET");
-
-  }
-
 if(
 [
 "Canceled",
@@ -214,6 +206,14 @@ continue;
 (dailyOrderStats[jam] || 0) + 1;
 
 processedOrders.add(order.id);
+
+  if(processedOrders.size > 5000){
+
+processedOrders.clear();
+
+console.log("CACHE RESET");
+
+  }
 
 orderMoneyStats[jam] =
 (orderMoneyStats[jam] || 0) + amount;
