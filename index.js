@@ -279,8 +279,6 @@ u.callback_query?.data;
 
 if(data==="stats"){
 
-if(data==="stats"){
-
 let text = "📊 STATISTIK ORDER\n\n";
 
 let totalOrder = 0;
