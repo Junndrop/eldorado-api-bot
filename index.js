@@ -54,21 +54,6 @@ console.log(err.message);
 }
 
 }
-
-async function sendStats(){
-
-let text = "📊 STATISTIK ORDER\n\n";
-
-for(let i=0;i<24;i++){
-
-const jam = i.toString().padStart(2,"0");
-
-text += `${jam}:00 = ${orderStats[i] || 0} order | $${(orderMoneyStats[i] || 0).toFixed(2)}\n`;
-}
-
-await sendTelegram(text);
-
-}
   
 async function getToken(){
 
@@ -296,15 +281,22 @@ if(data==="stats"){
 
 let text = "📊 STATISTIK ORDER\n\n";
 
+  let totalOrder = 0;
+let totalDollar = 0;
+
 for(let i=0;i<24;i++){
 
-const jam =
-i.toString().padStart(2,"0");
+const jam = i.toString().padStart(2,"0");
 
-text +=
-`${jam}:00 = ${orderStats[i] || 0} order\n`;
+  totalOrder += (orderStats[i] || 0);
+totalDollar += (orderMoneyStats[i] || 0);
+
+text += `${jam}:00 = ${orderStats[i] || 0} order | $${(orderMoneyStats[i] || 0).toFixed(2)}\n`;
 
 }
+
+  text += `\n💰 TOTAL HARI INI
+${totalOrder} order | $${totalDollar.toFixed(2)}`;
 
 await sendTelegram(text);
 
