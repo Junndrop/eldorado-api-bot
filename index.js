@@ -117,14 +117,6 @@ processedOrders.add(order.id);
 
   orderStates[order.id] =
 order.state?.state;
-  
-  if(processedOrders.size > 5000){
-
-processedOrders.clear();
-
-console.log("CACHE RESET");
-
-  }
 
 }
 
@@ -148,7 +140,9 @@ order.orderOfferDetails?.offerTitle ||
 "Unknown Item";
 
     const jam = Number(
-new Date().toLocaleString(
+new Date(
+order.createdDate || order.createdAt
+).toLocaleString(
 "id-ID",
 {
 timeZone:"Asia/Jakarta",
@@ -194,6 +188,14 @@ console.log("ORDER DIBATALKAN");
     }
 
 if(!processedOrders.has(order.id)){
+
+  if(processedOrders.size > 5000){
+
+processedOrders.clear();
+
+console.log("CACHE RESET");
+
+  }
 
 if(
 [
