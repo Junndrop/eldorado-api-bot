@@ -189,7 +189,7 @@ ${waktu}`,
 {text:"📊 Statistik",callback_data:"stats"}
 ],
 [
-{text:"✅ Pesanan Selesai",callback_data:`done_${order.id}`}
+{text:"🏦 Wallet",callback_data:"wallet"}
 ]
 ]
 );
@@ -323,6 +323,32 @@ const data =
 u.callback_query?.data;
 
 if(data==="stats"){
+
+  if(data==="wallet"){
+
+let totalDollar = 0;
+
+for(let i=0;i<24;i++){
+
+totalDollar +=
+(orderMoneyStats[i] || 0);
+
+}
+
+const wallet =
+totalDollar * 0.85;
+
+await sendTelegram(
+`🏦 WALLET SAAT INI
+
+💵 Gross:
+$${totalDollar.toFixed(2)}
+
+💰 Net:
+$${wallet.toFixed(2)}`
+);
+
+  }
 
 let text = "📊 STATISTIK ORDER\n\n";
 
