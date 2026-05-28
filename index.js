@@ -155,6 +155,9 @@ hour12:false
 ).split(".")[0]
 );
 
+    const amount =
+Number(order.totalPrice?.amount || 0);
+    
     if(
 oldState &&
 ![
@@ -189,13 +192,21 @@ console.log("ORDER DIBATALKAN");
 
 if(!processedOrders.has(order.id)){
 
+  if(
+[
+"Canceled",
+"Cancelled",
+"Refunded",
+"Failed"
+].includes(order.state?.state)
+){
+continue;
+  }
+
   orderStats[jam] =
 (orderStats[jam] || 0) + 1;
   dailyOrderStats[jam] =
 (dailyOrderStats[jam] || 0) + 1;
-  
-  const amount =
-Number(order.totalPrice?.amount || 0);
 
 processedOrders.add(order.id);
 
