@@ -288,7 +288,7 @@ u.callback_query?.data;
 
 if(data==="stats"){
 
-let text = "📊 STATISTIK ORDER HARI INI\n\n";
+let text = "📊 STATISTIK ORDER \n\n";
 
 for(let i=0;i<24;i++){
 
