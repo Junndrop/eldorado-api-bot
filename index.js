@@ -115,15 +115,18 @@ for(const order of orders){
 
 processedOrders.add(order.id);
 
-}
-
-    if(processedOrders.size > 5000){
+  orderStates[order.id] =
+order.state?.state;
+  
+  if(processedOrders.size > 5000){
 
 processedOrders.clear();
 
 console.log("CACHE RESET");
 
-    }
+  }
+
+}
 
 console.log("WARMUP SELESAI");
 return;
@@ -154,6 +157,9 @@ hour12:false
 }
 ).split(".")[0]
 );
+
+    const amount =
+Number(order.totalPrice?.amount || 0);
     
     if(
 oldState &&
@@ -220,9 +226,6 @@ order.createdDate || order.createdAt
 ).toLocaleString("id-ID",{
 timeZone:"Asia/Jakarta"
 });
-
-  const amount =
-Number(order.totalPrice?.amount || 0);
 
 await sendTelegram(
 
