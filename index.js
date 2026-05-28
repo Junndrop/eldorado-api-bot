@@ -155,41 +155,7 @@ hour12:false
 ).split(".")[0]
 );
 
-orderStats[jam] =
-(orderStats[jam] || 0) + 1;
-  dailyOrderStats[jam] =
-(dailyOrderStats[jam] || 0) + 1;
-  
-  const amount =
-Number(order.totalPrice?.amount || 0);
-
     if(
-oldState &&
-oldState !== "Canceled" &&
-order.state?.state === "Canceled"
-){
-
-      orderStats[jam] =
-Math.max(0,(orderStats[jam] || 0)-1);
-
-orderMoneyStats[jam] =
-Math.max(0,(orderMoneyStats[jam] || 0)-amount);
-
-    dailyOrderStats[jam] =
-Math.max(0,(dailyOrderStats[jam] || 0)-1);
-
-dailyMoneyStats[jam] =
-Math.max(0,(dailyMoneyStats[jam] || 0)-amount);
-
-console.log("ORDER DIBATALKAN");
-    }
-    
-
-if(!processedOrders.has(order.id)){
-
-processedOrders.add(order.id);
-
-  if(
 oldState &&
 ![
 "Canceled",
@@ -206,8 +172,36 @@ oldState &&
 ].includes(order.state?.state)
 ){
 
+orderStats[jam] =
+Math.max(0,(orderStats[jam] || 0)-1);
+
+orderMoneyStats[jam] =
+Math.max(0,(orderMoneyStats[jam] || 0)-amount);
+
+dailyOrderStats[jam] =
+Math.max(0,(dailyOrderStats[jam] || 0)-1);
+
+dailyMoneyStats[jam] =
+Math.max(0,(dailyMoneyStats[jam] || 0)-amount);
+
+console.log("ORDER DIBATALKAN");
+    }
+
+if(!processedOrders.has(order.id)){
+
+  orderStats[jam] =
+(orderStats[jam] || 0) + 1;
+  dailyOrderStats[jam] =
+(dailyOrderStats[jam] || 0) + 1;
+  
+  const amount =
+Number(order.totalPrice?.amount || 0);
+
+processedOrders.add(order.id);
+
 orderMoneyStats[jam] =
 (orderMoneyStats[jam] || 0) + amount;
+  
   dailyMoneyStats[jam] =
 (dailyMoneyStats[jam] || 0) + amount;
 
