@@ -2,6 +2,7 @@ const axios = require("axios");
 const { Amplify } = require("aws-amplify");
 const { signIn, fetchAuthSession } = require("aws-amplify/auth");
 
+
 const orderStats = {};
 const dailyOrderStats = {};
 const dailyMoneyStats = {};
@@ -118,6 +119,12 @@ console.log("TOTAL:",orders.length);
 
   for(const order of orders){
 
+    const oldState =
+orderStates[order.id];
+
+orderStates[order.id] =
+order.state?.state;
+
 const itemName =
 order.orderOfferDetails?.offerTitle ||
 "Unknown Item";
@@ -133,6 +140,17 @@ null;
 if(!processedOrders.has(order.id)){
 
 processedOrders.add(order.id);
+
+  if(
+[
+"Canceled",
+"Cancelled",
+"Refunded",
+"Failed"
+].includes(order.state?.state)
+){
+continue;
+  }
 
   const jam = Number(
 new Date().toLocaleString(
@@ -157,6 +175,21 @@ orderMoneyStats[jam] =
 (orderMoneyStats[jam] || 0) + amount;
   dailyMoneyStats[jam] =
 (dailyMoneyStats[jam] || 0) + amount;
+
+  if(
+oldState &&
+oldState !== "Canceled" &&
+order.state?.state === "Canceled"
+){
+
+orderStats[jam] =
+Math.max(0,(orderStats[jam] || 0)-1);
+
+orderMoneyStats[jam] =
+Math.max(0,(orderMoneyStats[jam] || 0)-amount);
+
+console.log("ORDER DIBATALKAN");
+  }
 
 console.log("KIRIM TELEGRAM...");
 
