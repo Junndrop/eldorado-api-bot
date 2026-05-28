@@ -117,6 +117,14 @@ processedOrders.add(order.id);
 
 }
 
+    if(processedOrders.size > 5000){
+
+processedOrders.clear();
+
+console.log("CACHE RESET");
+
+    }
+
 console.log("WARMUP SELESAI");
 return;
 
@@ -135,6 +143,25 @@ order.state?.state;
 const itemName =
 order.orderOfferDetails?.offerTitle ||
 "Unknown Item";
+
+    const jam = Number(
+new Date().toLocaleString(
+"id-ID",
+{
+timeZone:"Asia/Jakarta",
+hour:"2-digit",
+hour12:false
+}
+).split(".")[0]
+);
+
+orderStats[jam] =
+(orderStats[jam] || 0) + 1;
+  dailyOrderStats[jam] =
+(dailyOrderStats[jam] || 0) + 1;
+  
+  const amount =
+Number(order.totalPrice?.amount || 0);
 
     if(
 oldState &&
@@ -163,6 +190,14 @@ if(!processedOrders.has(order.id)){
 processedOrders.add(order.id);
 
   if(
+oldState &&
+![
+"Canceled",
+"Cancelled",
+"Refunded",
+"Failed"
+].includes(oldState)
+&&
 [
 "Canceled",
 "Cancelled",
@@ -170,27 +205,6 @@ processedOrders.add(order.id);
 "Failed"
 ].includes(order.state?.state)
 ){
-continue;
-  }
-
-  const jam = Number(
-new Date().toLocaleString(
-"id-ID",
-{
-timeZone:"Asia/Jakarta",
-hour:"2-digit",
-hour12:false
-}
-).split(".")[0]
-);
-
-orderStats[jam] =
-(orderStats[jam] || 0) + 1;
-  dailyOrderStats[jam] =
-(dailyOrderStats[jam] || 0) + 1;
-  
-  const amount =
-Number(order.totalPrice?.amount || 0);
 
 orderMoneyStats[jam] =
 (orderMoneyStats[jam] || 0) + amount;
