@@ -109,6 +109,19 @@ headers:{
 
 const orders = res.data.results || [];
 
+  if(processedOrders.size===0){
+
+for(const order of orders){
+
+processedOrders.add(order.id);
+
+}
+
+console.log("WARMUP SELESAI");
+return;
+
+  }
+
 console.log("TOTAL:",orders.length);
 
   for(const order of orders){
@@ -122,6 +135,28 @@ order.state?.state;
 const itemName =
 order.orderOfferDetails?.offerTitle ||
 "Unknown Item";
+
+    if(
+oldState &&
+oldState !== "Canceled" &&
+order.state?.state === "Canceled"
+){
+
+      orderStats[jam] =
+Math.max(0,(orderStats[jam] || 0)-1);
+
+orderMoneyStats[jam] =
+Math.max(0,(orderMoneyStats[jam] || 0)-amount);
+
+    dailyOrderStats[jam] =
+Math.max(0,(dailyOrderStats[jam] || 0)-1);
+
+dailyMoneyStats[jam] =
+Math.max(0,(dailyMoneyStats[jam] || 0)-amount);
+
+console.log("ORDER DIBATALKAN");
+    }
+    
 
 if(!processedOrders.has(order.id)){
 
@@ -161,27 +196,6 @@ orderMoneyStats[jam] =
 (orderMoneyStats[jam] || 0) + amount;
   dailyMoneyStats[jam] =
 (dailyMoneyStats[jam] || 0) + amount;
-
-  if(
-oldState &&
-oldState !== "Canceled" &&
-order.state?.state === "Canceled"
-){
-
-orderStats[jam] =
-Math.max(0,(orderStats[jam] || 0)-1);
-
-orderMoneyStats[jam] =
-Math.max(0,(orderMoneyStats[jam] || 0)-amount);
-
-    dailyOrderStats[jam] =
-Math.max(0,(dailyOrderStats[jam] || 0)-1);
-
-dailyMoneyStats[jam] =
-Math.max(0,(dailyMoneyStats[jam] || 0)-amount);
-
-console.log("ORDER DIBATALKAN");
-  }
 
 console.log("KIRIM TELEGRAM...");
 
@@ -338,7 +352,7 @@ text += `\n💰 TOTAL
 ${totalOrder} order | $${totalDollar.toFixed(2)}
 
 🏦 WALLET
-$${wallet.toFixed(2)}`;
+$${wallet}`;
 
 await sendTelegram(text);
 
