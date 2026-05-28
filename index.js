@@ -3,6 +3,8 @@ const { Amplify } = require("aws-amplify");
 const { signIn, fetchAuthSession } = require("aws-amplify/auth");
 
 const orderStats = {};
+const dailyOrderStats = {};
+const dailyMoneyStats = {};
 const orderMoneyStats = {};
 const processedOrders = new Set();
 const lastMessageCache = {};
@@ -145,12 +147,16 @@ hour12:false
 
 orderStats[jam] =
 (orderStats[jam] || 0) + 1;
+  dailyOrderStats[jam] =
+(dailyOrderStats[jam] || 0) + 1;
   
   const amount =
 Number(order.totalPrice?.amount || 0);
 
 orderMoneyStats[jam] =
 (orderMoneyStats[jam] || 0) + amount;
+  dailyMoneyStats[jam] =
+(dailyMoneyStats[jam] || 0) + amount;
 
 console.log("KIRIM TELEGRAM...");
 
@@ -244,20 +250,59 @@ await sendTelegram(
 
 });
 
-setInterval(()=>{
+setInterval(async ()=>{
 
-const now = new Date();
+const now = new Date().toLocaleString(
+"id-ID",
+{
+timeZone:"Asia/Jakarta",
+hour:"2-digit",
+minute:"2-digit",
+hour12:false
+}
+);
 
-if(
-now.getHours()===0 &&
-now.getMinutes()===0
-){
+if(now==="00.00"){
 
-sendStats();
+let text = "🌙 REKAP HARI INI\n\n";
+
+let totalOrder = 0;
+let totalDollar = 0;
+
+for(let i=0;i<24;i++){
+
+const jam =
+i.toString().padStart(2,"0");
+
+totalOrder +=
+(dailyOrderStats[i] || 0);
+
+totalDollar +=
+(dailyMoneyStats[i] || 0);
+
+text +=
+`${jam}:00 = ${dailyOrderStats[i] || 0} order | $${(dailyMoneyStats[i] || 0).toFixed(2)}\n`;
+
+}
+
+text += `\n💰 TOTAL HARI INI
+${totalOrder} order | $${totalDollar.toFixed(2)}`;
+
+await sendTelegram(text);
+
+for(let i=0;i<24;i++){
+
+dailyOrderStats[i] = 0;
+dailyMoneyStats[i] = 0;
+
+}
+
+console.log("DAILY STATS RESET");
 
 }
 
 },60000);
+
   setInterval(checkTelegramButtons,3000);
 
   async function checkTelegramButtons(){
