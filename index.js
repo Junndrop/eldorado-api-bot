@@ -154,9 +154,6 @@ hour12:false
 }
 ).split(".")[0]
 );
-
-    const amount =
-Number(order.totalPrice?.amount || 0);
     
     if(
 oldState &&
@@ -192,7 +189,7 @@ console.log("ORDER DIBATALKAN");
 
 if(!processedOrders.has(order.id)){
 
-  if(
+if(
 [
 "Canceled",
 "Cancelled",
@@ -201,7 +198,7 @@ if(!processedOrders.has(order.id)){
 ].includes(order.state?.state)
 ){
 continue;
-  }
+}
 
   orderStats[jam] =
 (orderStats[jam] || 0) + 1;
@@ -223,6 +220,9 @@ order.createdDate || order.createdAt
 ).toLocaleString("id-ID",{
 timeZone:"Asia/Jakarta"
 });
+
+  const amount =
+Number(order.totalPrice?.amount || 0);
 
 await sendTelegram(
 
