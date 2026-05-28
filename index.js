@@ -107,13 +107,7 @@ headers:{
 }
 );
 
-const orders=(res.data.results||[]).filter(
-x=>![
-"Canceled",
-"Completed",
-"Delivered"
-].includes(x.state?.state)
-);
+const orders = res.data.results || [];
 
 console.log("TOTAL:",orders.length);
 
@@ -179,6 +173,12 @@ Math.max(0,(orderStats[jam] || 0)-1);
 
 orderMoneyStats[jam] =
 Math.max(0,(orderMoneyStats[jam] || 0)-amount);
+
+    dailyOrderStats[jam] =
+Math.max(0,(dailyOrderStats[jam] || 0)-1);
+
+dailyMoneyStats[jam] =
+Math.max(0,(dailyMoneyStats[jam] || 0)-amount);
 
 console.log("ORDER DIBATALKAN");
   }
@@ -332,7 +332,7 @@ text +=
 }
 
 const wallet =
-totalDollar * 0.85;
+(totalDollar * 0.85).toFixed(2);
 
 text += `\n💰 TOTAL
 ${totalOrder} order | $${totalDollar.toFixed(2)}
