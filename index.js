@@ -231,7 +231,7 @@ timeZone:"Asia/Jakarta"
 
 await sendTelegram(
 
-👤 <b>Buyer</b>
+`👤 <b>Buyer</b>
 ${order.buyerUsername}
 
 🎁 <b>Item</b>
